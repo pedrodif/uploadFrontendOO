@@ -14,6 +14,10 @@ export class FeedbackForm extends Form {
     }
 
     gerenciarCampoObrigatorio(variante) {
+        if(variante.classList.contains('input-erro-campo-obrigatorio')) {
+           return 
+        }
+        
         variante.classList.add('input-erro-campo-obrigatorio')
         variante.insertAdjacentElement('afterend', this.montarMensagemErro())
     }
