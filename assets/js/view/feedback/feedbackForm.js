@@ -23,9 +23,9 @@ export class FeedbackForm extends Form {
     }
 
     resetarCampoObrigatorio(variante) {
-        variante.classList.remove('input-erro-campo-obrigatorio')
         
         if(variante.nextElementSibling.tagName === 'P') {
+            variante.classList.remove('input-erro-campo-obrigatorio')
             variante.nextElementSibling.remove()
         }   
     }
