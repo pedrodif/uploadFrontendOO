@@ -1,4 +1,4 @@
-import { FeedbackView } from '../view/feedback/index.js'
+import { FeedbackView } from '../view/feedback/main.js'
 import { FeedbackModel } from '../model/feedbackModel.js'
 import { FeedbackController } from '../controller/feedbackController.js'
 import { FeedbackRepository } from '../repository/feedbackRepository.js'

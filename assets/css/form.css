@@ -1,0 +1,9 @@
+.input-erro-campo-obrigatorio {
+    border: 1px solid red;
+}
+
+.mensagem-erro-campo-obrigatorio {
+    color: red;
+    font-size: 12px;
+    margin-top: -2px;
+}

@@ -1,69 +1,33 @@
 import { Utils } from "../../utils/main.js"
+import { Form } from "../components/form.js"
 
-export class FeedbackForm {
+export class FeedbackForm extends Form {
     constructor(form) {
-        this.form = form
+        super(form)
     }
 
-    limparForm() {
-        this.form.reset()
+    montarMensagemErro() {
+        const p = Utils.criarElemento('p')
+        p.textContent = 'Este campo é obrigatório. *'
+        p.classList.add('mensagem-erro-campo-obrigatorio')
+        return p
     }
 
-    submit(callback) {
-        this.form.addEventListener('submit', evento => {
-            evento.preventDefault()
-            const dadosRecuperados = Utils.lerDadosForm(evento.target)
-            
-            if(this.validarForm(dadosRecuperados)) {
-                callback(dadosRecuperados)
-                this.limparForm()
-            }  
-        })
-    }
-
-    definirValoresIniciais(valoresIniciais) {
-        const campos = this.form.querySelectorAll('input, select, textarea')
-
-        campos.forEach(campo => {
-            if (valoresIniciais[campo.name]) {
-                switch (campo.type) {
-                    case 'checkbox':
-                        campo.checked = valoresIniciais[campo.name]
-                        break
-                    case 'radio':
-                        if (campo.value === valoresIniciais[campo.name]) {
-                            campo.checked = true
-                        }
-                        break
-                    case 'select-one':
-                        const option = [...campo.options].find(opt => opt.value === valoresIniciais[campo.name])
-                        if (option) {
-                            option.selected = true
-                        }
-                        break
-                    default:
-                        campo.value = valoresIniciais[campo.name]
-                }
-            }
-        })
+    gerenciarCampoObrigatorio(variante) {
+        variante.classList.add('input-erro-campo-obrigatorio')
+        variante.insertAdjacentElement('afterend', this.montarMensagemErro())
     }
 
     validarForm(dados) {
-        let msg = ''
-         
-        if(!dados.titulo) {
-            msg += 'Informe o título do feedback \n'
-        }
+        const camposObrigatorios = ['titulo', 'descricao']
 
-        if(!dados.descricao) {
-            msg += 'Informe a descrição do feedback \n'
-        }
+        camposObrigatorios.forEach(campo => {
+            if(!dados[campo]){
+                this.gerenciarCampoObrigatorio(Utils.consultarSeletor(`[name=${campo}]`))
+                return false
+            } 
 
-        if(msg !== '') {
-            alert(msg)
-            return false
-        }
-
-        return true
+            return true
+        })
     }
 }
