@@ -22,15 +22,27 @@ export class FeedbackForm extends Form {
         variante.insertAdjacentElement('afterend', this.montarMensagemErro())
     }
 
+    resetarCampoObrigatorio(variante) {
+        variante.classList.remove('input-erro-campo-obrigatorio')
+        
+        if(variante.nextElementSibling.tagName === 'P') {
+            variante.nextElementSibling.remove()
+        }   
+    }
+
     validarForm(dados) {
         let validado = true
         const camposObrigatorios = ['titulo', 'descricao']
 
         camposObrigatorios.forEach(campo => {
+            const campoRecuperado = Utils.consultarSeletor(`[name=${campo}]`)
+
             if(!dados[campo]) {
-                this.gerenciarCampoObrigatorio(Utils.consultarSeletor(`[name=${campo}]`))
+                this.gerenciarCampoObrigatorio(campoRecuperado)
                 validado = false
-            } 
+            } else {
+                this.resetarCampoObrigatorio(campoRecuperado)
+            }
         })
 
         return validado
