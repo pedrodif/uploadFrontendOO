@@ -8,7 +8,7 @@ export class FeedbackForm extends Form {
 
     montarMensagemErro() {
         const p = Utils.criarElemento('p')
-        p.textContent = 'Este campo é obrigatório. *'
+        p.textContent = 'Este campo é obrigatório *'
         p.classList.add('mensagem-erro-campo-obrigatorio')
         return p
     }
@@ -27,8 +27,6 @@ export class FeedbackForm extends Form {
                 this.gerenciarCampoObrigatorio(Utils.consultarSeletor(`[name=${campo}]`))
                 validado = false
             } 
-    
-            validado = true
         })
 
         return validado
