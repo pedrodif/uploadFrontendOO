@@ -13,20 +13,19 @@ export class FeedbackForm extends Form {
         return p
     }
 
-    gerenciarCampoObrigatorio(variante) {
-        if(variante.classList.contains('input-erro-campo-obrigatorio')) {
-           return 
-        }
-        
-        variante.classList.add('input-erro-campo-obrigatorio')
-        variante.insertAdjacentElement('afterend', this.montarMensagemErro())
-    }
-
-    resetarCampoObrigatorio(variante) {
-        if(variante.nextElementSibling.tagName === 'P') {
+    gerenciarCampoObrigatorio(variante, valor) {
+        if (!valor) {
+            if(variante.classList.contains('input-erro-campo-obrigatorio')) {
+                return 
+            }
+             
+            variante.classList.add('input-erro-campo-obrigatorio')
+            variante.insertAdjacentElement('afterend', this.montarMensagemErro())
+        } else if(variante.nextElementSibling.tagName === 'P') {
             variante.classList.remove('input-erro-campo-obrigatorio')
             variante.nextElementSibling.remove()
-        }   
+        } 
+        
     }
 
     validarForm(dados) {
@@ -34,13 +33,10 @@ export class FeedbackForm extends Form {
         const camposObrigatorios = ['titulo', 'descricao']
 
         camposObrigatorios.forEach(campo => {
-            const campoRecuperado = Utils.consultarSeletor(`[name=${campo}]`)
-
+            this.gerenciarCampoObrigatorio(Utils.consultarSeletor(`[name=${campo}]`), dados[campo])
+            
             if(!dados[campo]) {
-                this.gerenciarCampoObrigatorio(campoRecuperado)
                 validado = false
-            } else {
-                this.resetarCampoObrigatorio(campoRecuperado)
             }
         })
 
