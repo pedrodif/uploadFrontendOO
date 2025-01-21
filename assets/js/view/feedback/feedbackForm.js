@@ -19,15 +19,18 @@ export class FeedbackForm extends Form {
     }
 
     validarForm(dados) {
+        let validado = true
         const camposObrigatorios = ['titulo', 'descricao']
 
         camposObrigatorios.forEach(campo => {
-            if(!dados[campo]){
+            if(!dados[campo]) {
                 this.gerenciarCampoObrigatorio(Utils.consultarSeletor(`[name=${campo}]`))
-                return false
+                validado = false
             } 
-
-            return true
+    
+            validado = true
         })
+
+        return validado
     }
 }
