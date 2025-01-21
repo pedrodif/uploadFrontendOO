@@ -48,7 +48,7 @@ export class Form {
         })
     }
 
-    validarForm(dados) {
+    validarForm() {
         throw new Error('O método validarForm deve ser implementado nas classes filhas.');
     }
 }
