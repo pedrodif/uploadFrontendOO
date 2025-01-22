@@ -70,4 +70,7 @@ export class Utils {
         window.history.replaceState({}, '', window.location.pathname + '?' + buscarParametro.toString())
     }
 
+    static gerenciarVisibilidade(campos, valor = 'none') {
+        campos.forEach(campo => campo.style.display = valor)
+    }
 }

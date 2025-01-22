@@ -21,10 +21,6 @@ export class Form {
         })
     }
 
-    validarForm() {
-        throw new Error('O método validarForm deve ser implementado nas classes filhas.');
-    }
-
     montarMensagemErro() {
         const p = Utils.criarElemento('p')
         p.textContent = 'Este campo é obrigatório *'
@@ -44,6 +40,17 @@ export class Form {
             seletor.classList.remove('input-erro-campo-obrigatorio')
             seletor.nextElementSibling.remove()
         }   
+    }
+
+    genrenciarVisibilidadeCampos({ campos, valor }) {
+        const camposArray = campos.split(',')
+        const camposRecuperados = camposArray.reduce((acc, campo) => 
+            [ ...acc, 
+                this.form.querySelector(`#${campo.trim()}`)
+            ], 
+        [])
+
+        Utils.gerenciarVisibilidade(camposRecuperados, valor)
     }
 
     definirValoresIniciais(valoresIniciais) {
@@ -71,5 +78,9 @@ export class Form {
                 }
             }
         })
+    }
+
+    validarForm() {
+        throw new Error('O método validarForm deve ser implementado nas classes filhas.');
     }
 }

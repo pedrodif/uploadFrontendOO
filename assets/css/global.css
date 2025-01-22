@@ -12,42 +12,11 @@ main {
     margin: 0 auto;
 }
 
-form {
-    width: 50%;
-    margin: 0 auto;
-    display: flex;
-    flex-flow: column;
-    gap: 8px;
-}
-
-input {
-    height: 32px;
-    padding: 8px;
-    border: 1px solid;
-    border-radius: 4.8px;
-}
-
-input[name="dataCriacao"] {
-    width: 140px;
-}
-
-textarea {
-    padding: 8px;
-    border: 1px solid;
-    border-radius: 4.8px;
-    resize: none;
-}
-
-fieldset {
-   border: none;
-   align-self: flex-end;
-   display: flex;
-    gap: 8px;
-}
-
 button {
     padding: 8px;  
     border: none;   
     cursor: pointer;
     border-radius: 4.8px;
 }
+
+

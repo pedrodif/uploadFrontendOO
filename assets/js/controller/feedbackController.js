@@ -69,6 +69,18 @@ export class FeedbackController {
         // Utils.adicionarParametroURL('modo', 'criar')
         this.listarFeedbacks()
     }
+    
+    consultarParametros() {
+        const urlParams = new URLSearchParams(window.location.search)
+    
+        return {
+            modo: urlParams.get("modo"),
+            gestorId: urlParams.get("gestorId"),
+            monitorId: urlParams.get("monitorId"),
+            feedbackId: urlParams.get("feedbackId"),
+            colaboradorId: urlParams.get("colaboradorId")
+        }
+    }
 
     gerenciarForm() {    
         const { modo } = this.consultarParametros()
@@ -80,20 +92,9 @@ export class FeedbackController {
                 break
             default:
                 this.feedbackView.getForm().definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
+                this.feedbackView.getForm().genrenciarVisibilidadeCampos({ campos: 'dataEdicao' })
                 this.feedbackView.getForm().submit(this.criar.bind(this))
                 break
-        }
-    }
-
-    consultarParametros() {
-        const urlParams = new URLSearchParams(window.location.search)
-    
-        return {
-            modo: urlParams.get("modo"),
-            gestorId: urlParams.get("gestorId"),
-            monitorId: urlParams.get("monitorId"),
-            feedbackId: urlParams.get("feedbackId"),
-            colaboradorId: urlParams.get("colaboradorId")
         }
     }
 }

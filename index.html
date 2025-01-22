@@ -11,20 +11,33 @@
     <header></header>
 
     <main>
-        <h1>Novo Feedback</h1>
+        <section>
+            <h1>Novo Feedback</h1>
 
-        <form id="feedback-form">
-            <label for="dataCriacao">Criado em: </label>
-            <input type="date" name="dataCriacao" disabled />
+            <form id="feedback-form">
+                <fieldset>
+                    <fieldset id="dataCriacao">
+                        <i class="fa-regular fa-calendar-days"></i>
+                        <label for="dataCriacao">Criado em: </label>
+                        <input type="date" name="dataCriacao" disabled />
+                    </fieldset>
 
-            <input type="text" name="titulo" placeholder="Título">
-            <textarea name="descricao" placeholder="Descrição"></textarea>
+                    <fieldset id="dataEdicao">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <label for="dataEdicao">Editado em: </label>
+                        <input type="date" name="dataEdicao" disabled />
+                    </fieldset>
+                </fieldset>
 
-            <fieldset>
-                <button type="submit">Criar</button>
-                <button type="reset">Limpar</button>
-            </fieldset>
-        </form>
+                <input type="text" name="titulo" placeholder="Título">
+                <textarea name="descricao" placeholder="Descrição"></textarea>
+
+                <fieldset>
+                    <button type="submit">Criar</button>
+                    <button type="reset">Limpar</button>
+                </fieldset>
+            </form>
+        </section>
 
         <section>
             <h1>Feedbacks Enviados</h1>
