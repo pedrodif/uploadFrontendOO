@@ -79,6 +79,7 @@ export class FeedbackController {
                 this.feedbackView.getForm().submit(this.atualizar.bind(this))
                 break
             default:
+                this.feedbackView.getForm().definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
                 this.feedbackView.getForm().submit(this.criar.bind(this))
                 break
         }
