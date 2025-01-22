@@ -51,4 +51,25 @@ export class Form {
     validarForm() {
         throw new Error('O método validarForm deve ser implementado nas classes filhas.');
     }
+
+    montarMensagemErro() {
+        const p = Utils.criarElemento('p')
+        p.textContent = 'Este campo é obrigatório *'
+        p.classList.add('mensagem-erro-campo-obrigatorio')
+        return p
+    }
+
+    gerenciarCampoObrigatorio(seletor, variante) {
+        if (!variante) {
+            if(seletor.classList.contains('input-erro-campo-obrigatorio')) {
+                return 
+            }
+             
+            seletor.classList.add('input-erro-campo-obrigatorio')
+            seletor.insertAdjacentElement('afterend', this.montarMensagemErro())
+        } else if(seletor.nextElementSibling.tagName === 'P') {
+            seletor.classList.remove('input-erro-campo-obrigatorio')
+            seletor.nextElementSibling.remove()
+        }   
+    }
 }
