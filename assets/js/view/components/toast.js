@@ -17,9 +17,9 @@ export class Toast {
 
     montarToast(mensagem, tipo) {
         const toast = Utils.criarElemento('p')
+        toast.setAttribute('role', 'alert')
         toast.className = `toast ${tipo}`
         toast.textContent = mensagem
-        toast.setAttribute('role', 'alert')
 
         return toast
     }

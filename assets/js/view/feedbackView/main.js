@@ -12,7 +12,7 @@ export class FeedbackView {
         return this.form
     }
 
-    listarFeedbacks(feedbacks = []) {
+    listarFeedbacks(feedbacks) {
         this.feedbackContainer.innerHTML = ''
 
         if(feedbacks.length > 0) {

@@ -1,5 +1,6 @@
 import { Utils } from '../utils/main.js'
 import { Toast } from '../view/components/toast.js'
+import { Loader } from '../view/components/loader.js'
 
 export class FeedbackController {
     constructor(feedbackModel, feedbackView) {
@@ -9,6 +10,8 @@ export class FeedbackController {
     }
 
     async listarFeedbacks() {
+        Loader.getLoader().show()
+
         let feedbacks = []
         const { colaboradorId, gestorId } = this.consultarParametros()
 
@@ -17,11 +20,19 @@ export class FeedbackController {
         } else {
             feedbacks = await this.feedbackModel.listarPorGestorEColaborador(gestorId, colaboradorId)
         }
+
+        Loader.getLoader().hide()
+
+        if(!feedbacks) {
+            Toast.getToast().show('Erro ao listar feedbacks.', 'erro')
+            return
+        }
         
         this.feedbackView.listarFeedbacks(feedbacks)
     }
 
     async criar(feedback) {
+        Loader.getLoader().show()
         const { colaboradorId, gestorId, monitorId } = this.consultarParametros()
 
         const feedbackCriado = await this.feedbackModel.criar({
@@ -30,6 +41,8 @@ export class FeedbackController {
             colaboradorId: +colaboradorId,
             gestorId: gestorId ? +gestorId : +monitorId
         })
+
+        Loader.getLoader().hide()
 
         if(!feedbackCriado) {
             Toast.getToast().show('Erro ao criar feedback.', 'erro')
@@ -42,10 +55,12 @@ export class FeedbackController {
 
    
     async recuperarFeedbackPorId() {
+        Loader.getLoader().show()
         const { feedbackId } = this.consultarParametros()
 
         this.feedbackRecuperado = await this.feedbackModel.recuperarPorId(feedbackId)
-        
+        Loader.getLoader().hide()
+
         if (!this.feedbackRecuperado) {
             Toast.getToast().show('Feedback não encontrado.', 'erro')
             return
@@ -55,11 +70,15 @@ export class FeedbackController {
     }
 
     async atualizar(feedback) {
+        Loader.getLoader().show()
+
         const feedbackAtualizado = await this.feedbackModel.atualizar(this.feedbackRecuperado.id, {
             ...this.feedbackRecuperado,
             ...feedback,
             dataEdicao: Utils.gerenciarData()
         })
+
+        Loader.getLoader().hide()
         
         if(!feedbackAtualizado) {
             Toast.getToast().show('Erro ao atualizar feedback.', 'erro')
