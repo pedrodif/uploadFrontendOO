@@ -15,21 +15,21 @@ export class Toast {
         return container
     }
 
-    montarToast(message, type) {
+    montarToast(mensagem, tipo) {
         const toast = Utils.criarElemento('p')
-        toast.className = `toast ${type}`
-        toast.textContent = message
+        toast.className = `toast ${tipo}`
+        toast.textContent = mensagem
         toast.setAttribute('role', 'alert')
 
         return toast
     }
 
-    show(message, type = 'info') {
+    show(mensagem, tipo = 'info') {
         if (this.container.children.length === 3) {
             this.container.firstChild.remove()
         }
 
-        const toast = this.montarToast(message, type)
+        const toast = this.montarToast(mensagem, tipo)
         this.container.appendChild(toast)
 
         setTimeout(() => {

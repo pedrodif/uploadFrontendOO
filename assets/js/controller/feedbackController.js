@@ -32,11 +32,11 @@ export class FeedbackController {
         })
 
         if(!feedbackCriado) {
-            Toast.getToast().show('Erro ao criar feedback. Tente novamente!', 'erro')
+            Toast.getToast().show('Erro ao criar feedback!', 'sucesso')
             return 
         } 
         
-        alert('Feedback criado com sucesso')
+        Toast.getToast().show('Feedback criado com sucesso', 'sucesso')
         this.feedbackView.atualizarListaFeedbacks(feedbackCriado)
     }
 
