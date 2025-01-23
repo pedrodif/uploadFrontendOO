@@ -42,16 +42,19 @@ export class Form {
         }   
     }
 
-    genrenciarVisibilidadeCampos({ campos, valor }) {
-        const camposArray = campos.split(',')
-        const camposRecuperados = camposArray.reduce((acc, campo) => 
-            [ ...acc, 
-                this.form.querySelector(`#${campo.trim()}`)
-            ], 
-        [])
+    // genrenciarVisibilidadeCampos({ campos, display = 'none' }) {
+    //     const camposArray = campos.split(',')
+    //     // const camposRecuperados = camposArray.reduce((acc, campo) => 
+    //     //     [ ...acc, 
+    //     //         this.form.querySelector(`#${campo.trim()}`)
+    //     //     ], 
+    //     // [])
 
-        Utils.gerenciarVisibilidade(camposRecuperados, valor)
-    }
+    //     camposArray.forEach(campo => this.form.querySelector(`#${campo.trim()}`).style.display = display )
+    //     console.table(camposArray)
+
+    //     Utils.gerenciarVisibilidade(camposRecuperados, display)
+    // }
 
     definirValoresIniciais(valoresIniciais) {
         const campos = this.form.querySelectorAll('input, select, textarea')

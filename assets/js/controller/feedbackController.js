@@ -1,4 +1,5 @@
 import { Utils } from '../utils/main.js'
+import { Toast } from '../view/components/toast.js'
 
 export class FeedbackController {
     constructor(feedbackModel, feedbackView) {
@@ -31,7 +32,7 @@ export class FeedbackController {
         })
 
         if(!feedbackCriado) {
-            alert('Erro ao criar feedback')
+            Toast.getToast().show('Erro ao criar feedback. Tente novamente!', 'erro')
             return 
         } 
         
@@ -92,7 +93,7 @@ export class FeedbackController {
                 break
             default:
                 this.feedbackView.getForm().definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
-                this.feedbackView.getForm().genrenciarVisibilidadeCampos({ campos: 'dataEdicao' })
+                // this.feedbackView.getForm().genrenciarVisibilidadeCampos({ campos: 'dataEdicao' })
                 this.feedbackView.getForm().submit(this.criar.bind(this))
                 break
         }
