@@ -10,6 +10,12 @@
     --green_dark: #006B3E;
     --green_mid: #2BDB91;
     --green_light: #9BEDCA;
+    --red_mid: #dc3545;
+    --red_dark: #b21f2d;
+    --blue_mid: #007bff ;
+    --blue_dark: #0056b3;
+    --yellow_mid: #ffc107;
+    --yellow_dark: #d39e00;
     --radius: 4.8px;
     --btn_opacity: 0.8;
     --box_shadow: 0 4px 4px rgba(0, 0, 0, 0.234);

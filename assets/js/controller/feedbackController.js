@@ -32,11 +32,11 @@ export class FeedbackController {
         })
 
         if(!feedbackCriado) {
-            Toast.getToast().show('Erro ao criar feedback!', 'sucesso')
+            Toast.getToast().show('Erro ao criar feedback.', 'erro')
             return 
         } 
         
-        Toast.getToast().show('Feedback criado com sucesso', 'sucesso')
+        Toast.getToast().show('Feedback criado com sucesso!', 'sucesso')
         this.feedbackView.atualizarListaFeedbacks(feedbackCriado)
     }
 
@@ -47,7 +47,7 @@ export class FeedbackController {
         this.feedbackRecuperado = await this.feedbackModel.recuperarPorId(feedbackId)
         
         if (!this.feedbackRecuperado) {
-            alert('Feedback não encontrado')
+            Toast.getToast().show('Feedback não encontrado.', 'erro')
             return
         }
 
@@ -62,11 +62,11 @@ export class FeedbackController {
         })
         
         if(!feedbackAtualizado) {
-            alert('Erro ao atualizar feedback')
+            Toast.getToast().show('Erro ao atualizar feedback.', 'erro')
             return 
         }
 
-        alert('Feedback atualizado com sucesso')
+        Toast.getToast().show('eedback atualizado com sucesso!', 'sucesso')
         // Utils.adicionarParametroURL('modo', 'criar')
         this.listarFeedbacks()
     }

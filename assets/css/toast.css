@@ -47,21 +47,21 @@
 }
 
 .toast.sucesso {
-    background-color: #28a745;
-    border-left: 5px solid #1e7e34;
+    background-color: var(--green_mid);
+    border-left: 5px solid var(--green_dark);
 }
 
 .toast.erro {
-    background-color: #dc3545;
-    border-left: 5px solid #b21f2d;
+    background-color: var(--red_mid);
+    border-left: 5px solid var(--red_dark);
 }
 
 .toast.info {
-    background-color: #007bff;
-    border-left: 5px solid #0056b3;
+    background-color: var(--blue_mid);
+    border-left: 5px solid var(--blue_dark);
 }
 
 .toast.aviso {
-    background-color: #ffc107;
-    border-left: 5px solid #d39e00;
+    background-color: var(--yellow_mid);
+    border-left: 5px solid var(--yellow_dark);
 }
