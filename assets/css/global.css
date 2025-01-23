@@ -19,6 +19,7 @@
     --radius: 4.8px;
     --btn_opacity: 0.8;
     --box_shadow: 0 4px 4px rgba(0, 0, 0, 0.234);
+    --opacity_background: rgba(255, 255, 255, 0.8);
 }
 
 * {
