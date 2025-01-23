@@ -28,8 +28,8 @@ export class Form {
         return p
     }
 
-    gerenciarCampoObrigatorio(seletor, variante) {
-        if (!variante) {
+    gerenciarCampoObrigatorio(seletor, valor) {
+        if (!valor) {
             if(seletor.classList.contains('input-erro-campo-obrigatorio')) {
                 return 
             }
