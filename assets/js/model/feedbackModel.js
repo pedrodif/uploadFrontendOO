@@ -1,37 +1,70 @@
+import { Utils } from '../utils/main.js'
+
 export class FeedbackModel {
-    constructor(feedbackRepository) {
-        this.feedbackRepository = feedbackRepository
+    #titulo
+    #descricao
+    #dataCriacao
+    #gestorId
+    #colaboradorId
+
+    constructor(feedback) {
+        this.titulo = feedback.titulo
+        this.descricao = feedback.descricao
+        this.gestorId = feedback.gestorId
+        this.colaboradorId = feedback.colaboradorId
+        this.#dataCriacao = Utils.gerenciarData()
     }
 
-    async criar(feedback) {
-       const feedbackCriado = await this.feedbackRepository.createFeedback(feedback)
-       return feedbackCriado 
+    get titulo() {
+        return this.#titulo
     }
 
-    async atualizar(id, feedback) {
-        const feedbackAtualizado = await this.feedbackRepository.updateFeedback(id, feedback)
-        return feedbackAtualizado 
-    }
-    
-    async listarPorGestorEColaborador(gestorId, colaboradorId) {
-       const feedbacksRecuperados = 
-            await this.feedbackRepository.getFeedbacksByGestorIdAndColaboradorId(gestorId, colaboradorId)
-            
-       return feedbacksRecuperados
+    set titulo(titulo) {
+        if (titulo.length < 5) {
+            throw new Error('O título deve ter no mínimo 5 caracteres.')
+        }
+
+        this.#titulo = titulo
     }
 
-    async listarPorColaborador(colaboradorId) {
-        const feedbacksRecuperados = await this.feedbackRepository.getFeedbacksByColaboradorId(colaboradorId)
-        return feedbacksRecuperados
+    get descricao() {
+        return this.#descricao
     }
 
-    async recuperarPorId(id) {
-        const feedbackRecuperado = await this.feedbackRepository.getFeedbackById(id)
-        return feedbackRecuperado
+    set descricao(descricao) {
+        if (descricao.length < 10) {
+            throw new Error('A descrição deve ter no mínimo 10 caracteres.')
+        }
+
+        this.#descricao = descricao
     }
 
+    get gestorId() {
+        return this.#gestorId
+    }
 
-    deletar(id) {
-        return 'deletado com sucesso'
+    set gestorId(gestorId) {
+        if (!gestorId) {
+            throw new Error('O gestor deve ser informado.')
+        }
+        
+        this.#gestorId = +gestorId
+    }
+
+    get colaboradorId() {
+        return this.#colaboradorId
+    }
+
+    set colaboradorId(colaboradorId) {
+        if (!colaboradorId) {
+            throw new Error('O colaborador deve ser informado.')
+        }
+
+        this.#colaboradorId = +colaboradorId
+    }
+
+    get dataCriacao() {
+        return this.#dataCriacao
     }
 }
+
