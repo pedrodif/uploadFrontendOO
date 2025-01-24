@@ -1,4 +1,4 @@
-import { Utils } from '../utils/main.js'
+import { Utils } from '../../Utils.js'
 
 export class FeedbackModel {
     #titulo
@@ -47,7 +47,7 @@ export class FeedbackModel {
         if (!gestorId) {
             throw new Error('O gestor deve ser informado.')
         }
-        
+
         this.#gestorId = +gestorId
     }
 

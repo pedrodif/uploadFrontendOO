@@ -1,5 +1,5 @@
-import { Utils } from "../../utils/main.js"
-import { Form } from "../components/form.js"
+import { Utils } from '../../Utils.js'
+import { Form } from "../components/Form.js"
 
 export class FeedbackForm extends Form {
     constructor(form) {

@@ -1,10 +1,10 @@
-import { Utils } from '../utils/main.js'
+import { Utils } from '../Utils.js'
 
-import { Toast } from '../view/components/toast.js'
-import { Loader } from '../view/components/loader.js'
+import { Toast } from '../view/components/Toast.js'
+import { Loader } from '../view/components/Loader.js'
 
-import { FeedbackView } from '../view/feedbackView/main.js'
-import { FeedbackService } from '../service/feedbackService.js'
+import { FeedbackView } from '../view/feedback/FeedbackView.js'
+import { FeedbackService } from '../service/FeedbackService.js'
 
 export class FeedbackController {
     constructor() {
@@ -46,14 +46,17 @@ export class FeedbackController {
         })
 
         Loader.getLoader().hide()
-
-        if(!feedbackCriado) {
-            Toast.getToast().show('Erro ao criar feedback.', 'erro')
-            return 
-        } 
         
-        Toast.getToast().show('Feedback criado com sucesso!', 'sucesso')
-        this.feedbackView.atualizarListaFeedbacks(feedbackCriado)
+        console.log(feedbackCriado)
+        console.log(!feedbackCriado)
+
+        // if(!feedbackCriado) {
+        //     Toast.getToast().show('Erro ao criar feedback.', 'erro')
+        //     return 
+        // } 
+        
+        // Toast.getToast().show('Feedback criado com sucesso!', 'sucesso')
+        // this.feedbackView.atualizarListaFeedbacks(feedbackCriado)
     }
 
    

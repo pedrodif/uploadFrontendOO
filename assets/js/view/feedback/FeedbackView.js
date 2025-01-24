@@ -1,6 +1,5 @@
-import { Utils } from '../../utils/main.js'
-import { FeedbackCard } from './feedbackCard.js'
-import { FeedbackForm } from './feedbackForm.js'
+import { Utils } from '../../Utils.js'
+import { FeedbackCard } from './FeedbackForm.js'
 
 export class FeedbackView {
     constructor() {

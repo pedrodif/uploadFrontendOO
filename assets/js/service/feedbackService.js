@@ -1,26 +1,31 @@
-import { FeedbackAPIClient } from '../api-client/feedbackAPIClient.js'
+import { NovoFeedback } from '../model/feedback/NovoFeedback.js'
+import { FeedbackAPIClient } from '../api-client/FeedbackAPIClient.js'
 
 export class FeedbackService {
     constructor() {
-        this.feedbackModel = new FeedbackModel()
         this.feedbackAPIClient = new FeedbackAPIClient()
     }
 
     async criar(feedback) {
-       const feedbackCriado = await this.feedbackAPIClient.createFeedback(feedback)
-       return feedbackCriado 
+        try {
+            const feedbackValidado = new NovoFeedback(feedback)
+            const feedbackCriado = await this.feedbackAPIClient.createFeedback(feedbackValidado)
+            return feedbackCriado
+        } catch (error) {
+            return error.message
+        }
     }
 
     async atualizar(id, feedback) {
         const feedbackAtualizado = await this.feedbackAPIClient.updateFeedback(id, feedback)
-        return feedbackAtualizado 
+        return feedbackAtualizado
     }
-    
+
     async listarPorGestorEColaborador(gestorId, colaboradorId) {
-       const feedbacksRecuperados = 
+        const feedbacksRecuperados =
             await this.feedbackAPIClient.getFeedbacksByGestorIdAndColaboradorId(gestorId, colaboradorId)
-            
-       return feedbacksRecuperados
+
+        return feedbacksRecuperados
     }
 
     async listarPorColaborador(colaboradorId) {

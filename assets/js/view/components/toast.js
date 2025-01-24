@@ -1,4 +1,4 @@
-import { Utils } from '../../utils/main.js'
+import { Utils } from '../../Utils.js'
 
 export class Toast {
     constructor() {

@@ -1,4 +1,4 @@
-import { FeedbackController } from '../controller/feedbackController.js'
+import { FeedbackController } from '../controller/FeedbackController.js'
 
 const feedbackController = new FeedbackController()
 
