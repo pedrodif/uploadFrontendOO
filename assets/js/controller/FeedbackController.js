@@ -19,7 +19,7 @@ export class FeedbackController {
         let feedbacks = []
         const { colaboradorId, gestorId } = this.consultarParametros()
 
-        if(!this.gestorId) {
+        if(!gestorId) {
             feedbacks = await this.feedbackService.listarPorColaborador(colaboradorId)
         } else {
             feedbacks = await this.feedbackService.listarPorGestorEColaborador(gestorId, colaboradorId)
@@ -48,7 +48,6 @@ export class FeedbackController {
         Loader.getLoader().hide()
         
         console.log(feedbackCriado)
-        console.log(!feedbackCriado)
 
         // if(!feedbackCriado) {
         //     Toast.getToast().show('Erro ao criar feedback.', 'erro')
@@ -78,11 +77,12 @@ export class FeedbackController {
     async atualizar(feedback) {
         Loader.getLoader().show()
 
-        const feedbackAtualizado = await this.feedbackService.atualizar(this.feedbackRecuperado.id, {
-            ...this.feedbackRecuperado,
-            ...feedback,
-            dataEdicao: Utils.gerenciarData()
-        })
+        const feedbackAtualizado = 
+            await this.feedbackService.atualizar(
+                this.feedbackRecuperado.id, 
+                this.feedbackRecuperado,
+                feedback
+            )
 
         Loader.getLoader().hide()
         

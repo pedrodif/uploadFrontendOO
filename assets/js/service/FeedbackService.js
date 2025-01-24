@@ -1,4 +1,4 @@
-import { NovoFeedback } from '../model/feedback/NovoFeedback.js'
+import { FeedbackNovo } from '../model/feedback/FeedbackNovo.js'
 import { FeedbackAPIClient } from '../api-client/FeedbackAPIClient.js'
 
 export class FeedbackService {
@@ -8,9 +8,9 @@ export class FeedbackService {
 
     async criar(feedback) {
         try {
-            const feedbackValidado = new NovoFeedback(feedback)
-            const feedbackCriado = await this.feedbackAPIClient.createFeedback(feedbackValidado)
-            return feedbackCriado
+            const feedbackValidado = new FeedbackNovo(feedback)
+            // const feedbackCriado = await this.feedbackAPIClient.createFeedback(feedbackValidado)
+           return feedbackValidado.toJSON()
         } catch (error) {
             return error.message
         }

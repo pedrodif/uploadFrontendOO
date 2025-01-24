@@ -1,18 +1,16 @@
-import { Utils } from '../../Utils.js'
-
 export class FeedbackModel {
     #titulo
     #descricao
-    #dataCriacao
     #gestorId
     #colaboradorId
+    #dataCriacao
 
     constructor(feedback) {
         this.titulo = feedback.titulo
         this.descricao = feedback.descricao
         this.gestorId = feedback.gestorId
         this.colaboradorId = feedback.colaboradorId
-        this.#dataCriacao = Utils.gerenciarData()
+        this.dataCriacao = feedback.dataCriacao
     }
 
     get titulo() {
@@ -65,6 +63,20 @@ export class FeedbackModel {
 
     get dataCriacao() {
         return this.#dataCriacao
+    }
+
+    set dataCriacao(dataCriacao) {
+        this.#dataCriacao = dataCriacao
+    }
+
+    toJSON() {
+        return {
+            titulo: this.titulo,
+            descricao: this.descricao,
+            gestorId: this.gestorId,
+            colaboradorId: this.colaboradorId,
+            dataCriacao: this.dataCriacao
+        }
     }
 }
 
