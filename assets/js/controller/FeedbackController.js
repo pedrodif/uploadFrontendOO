@@ -1,6 +1,7 @@
 import { Utils } from '../Utils.js'
 import { Toast } from '../view/components/Toast.js'
 import { Loader } from '../view/components/Loader.js'
+
 import { FeedbackView } from '../view/feedback/FeedbackView.js'
 import { FeedbackService } from '../service/FeedbackService.js'
 
