@@ -1,22 +1,22 @@
-import { Utils } from '../utils/Utils.js'
+import { Utils } from '../../Utils.js'
 import { FeedbackModel } from './FeedbackModel.js'
 
 export class FeedbackAtualizado extends FeedbackModel {
     #dataEdicao
 
-    constructor(feedback, feedbackAtualizado) {
+    constructor(feedbackRecuperado, feedbackAtualizado) {
         super(feedbackAtualizado)
         this.dataEdicao = Utils.gerenciarData()
-        this.#validarAlteracao(feedback, feedbackAtualizado)
+        this.#validarAlteracao(feedbackRecuperado, feedbackAtualizado)
     }
 
     get dataEdicao() {
         return this.#dataEdicao
     }
     
-    #validarAlteracao(feedback, feedbackAtualizado) {
+    #validarAlteracao(feedbackRecuperado, feedbackAtualizado) {
         for(let campo in feedbackAtualizado) {
-            if(feedback[campo] === feedbackAtualizado[campo]) {
+            if(feedbackRecuperado[campo] === feedbackAtualizado[campo]) {
                 throw new Error(`O campo ${campo} não foi alterado.`)
             }
         }

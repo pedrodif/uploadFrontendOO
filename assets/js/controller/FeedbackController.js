@@ -1,8 +1,6 @@
 import { Utils } from '../Utils.js'
-
 import { Toast } from '../view/components/Toast.js'
 import { Loader } from '../view/components/Loader.js'
-
 import { FeedbackView } from '../view/feedback/FeedbackView.js'
 import { FeedbackService } from '../service/FeedbackService.js'
 
@@ -13,58 +11,93 @@ export class FeedbackController {
         this.feedbackRecuperado = null
     }
 
-    async listarFeedbacks() {
+    async listarFeedbacks(variante = 'perfil') {
         Loader.getLoader().show()
-
-        let feedbacks = []
         const { colaboradorId, gestorId } = this.consultarParametros()
-
-        if(!gestorId) {
-            feedbacks = await this.feedbackService.listarPorColaborador(colaboradorId)
-        } else {
-            feedbacks = await this.feedbackService.listarPorGestorEColaborador(gestorId, colaboradorId)
-        }
-
+    
+        const resposta = variante === 'perfil' ? await this.feedbackService.listarPorColaborador(colaboradorId)
+            : await this.feedbackService.listarPorGestorEColaborador(gestorId, colaboradorId)
+    
         Loader.getLoader().hide()
 
-        if(!feedbacks) {
+        if(resposta?.erro) {
+            Toast.getToast().show(resposta.erro, 'erro')
+            return
+        }
+
+        if(!resposta) {
             Toast.getToast().show('Erro ao listar feedbacks.', 'erro')
             return
         }
         
-        this.feedbackView.listarFeedbacks(feedbacks)
+        this.feedbackView.listarFeedbacks(resposta)
     }
 
     async criar(feedback) {
         Loader.getLoader().show()
         const { colaboradorId, gestorId, monitorId } = this.consultarParametros()
 
-        const feedbackCriado = await this.feedbackService.criar({
+        const resposta = await this.feedbackService.criar({
             ...feedback, 
             colaboradorId,
             gestorId: gestorId ?? monitorId
         })
 
         Loader.getLoader().hide()
-        
-        console.log(feedbackCriado)
 
-        // if(!feedbackCriado) {
-        //     Toast.getToast().show('Erro ao criar feedback.', 'erro')
-        //     return 
-        // } 
+        if(resposta?.erro) {
+            Toast.getToast().show(resposta.erro, 'erro')
+            return
+        }
+
+        if(!resposta) {
+            Toast.getToast().show('Erro ao criar feedback.', 'erro')
+            return 
+        } 
         
-        // Toast.getToast().show('Feedback criado com sucesso!', 'sucesso')
-        // this.feedbackView.atualizarListaFeedbacks(feedbackCriado)
+        Toast.getToast().show('Feedback criado com sucesso!', 'sucesso')
+        this.feedbackView.atualizarListaFeedbacks(feedbackCriado)
     }
 
-   
+    async atualizar(feedbackAtualizado) {
+        Loader.getLoader().show()
+        const { id } = this.feedbackRecuperado
+
+        const resposta = 
+            await this.feedbackService.atualizar(
+                id, 
+                this.feedbackRecuperado,
+                feedbackAtualizado
+            )
+
+        Loader.getLoader().hide()
+
+        if(resposta?.erro) {
+            Toast.getToast().show(resposta.erro, 'erro')
+            return
+        }
+        
+        if(!resposta) {
+            Toast.getToast().show('Erro ao atualizar feedback.', 'erro')
+            return 
+        }
+
+        Toast.getToast().show('eedback atualizado com sucesso!', 'sucesso')
+        // Utils.adicionarParametroURL('modo', 'criar')
+        this.listarFeedbacks()
+    }
+
     async recuperarFeedbackPorId() {
         Loader.getLoader().show()
         const { feedbackId } = this.consultarParametros()
 
         this.feedbackRecuperado = await this.feedbackService.recuperarPorId(feedbackId)
         Loader.getLoader().hide()
+
+        if(this.feedbackRecuperado?.erro) {
+            Toast.getToast().show(resposta.erro, 'erro')
+            return
+        }
 
         if (!this.feedbackRecuperado) {
             Toast.getToast().show('Feedback não encontrado.', 'erro')
@@ -74,27 +107,6 @@ export class FeedbackController {
         this.feedbackView.getForm().definirValoresIniciais(this.feedbackRecuperado)
     }
 
-    async atualizar(feedback) {
-        Loader.getLoader().show()
-
-        const feedbackAtualizado = 
-            await this.feedbackService.atualizar(
-                this.feedbackRecuperado.id, 
-                this.feedbackRecuperado,
-                feedback
-            )
-
-        Loader.getLoader().hide()
-        
-        if(!feedbackAtualizado) {
-            Toast.getToast().show('Erro ao atualizar feedback.', 'erro')
-            return 
-        }
-
-        Toast.getToast().show('eedback atualizado com sucesso!', 'sucesso')
-        // Utils.adicionarParametroURL('modo', 'criar')
-        this.listarFeedbacks()
-    }
     
     consultarParametros() {
         const urlParams = new URLSearchParams(window.location.search)

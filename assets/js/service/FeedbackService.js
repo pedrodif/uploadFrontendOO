@@ -1,5 +1,7 @@
-import { FeedbackNovo } from '../model/feedback/FeedbackNovo.js'
 import { FeedbackAPIClient } from '../api-client/FeedbackAPIClient.js'
+
+import { FeedbackNovo } from '../model/feedback/FeedbackNovo.js'
+import { FeedbackAtualizado } from '../model/feedback/FeedbackAtualizado.js'
 
 export class FeedbackService {
     constructor() {
@@ -9,37 +11,56 @@ export class FeedbackService {
     async criar(feedback) {
         try {
             const feedbackValidado = new FeedbackNovo(feedback)
-            // const feedbackCriado = await this.feedbackAPIClient.createFeedback(feedbackValidado)
-           return feedbackValidado.toJSON()
+            const resposta = await this.feedbackAPIClient.createFeedback(feedbackValidado)
+            return resposta
         } catch (error) {
-            return error.message
+            return { erro: error.message }
         }
     }
 
-    async atualizar(id, feedback) {
-        const feedbackAtualizado = await this.feedbackAPIClient.updateFeedback(id, feedback)
-        return feedbackAtualizado
+    async atualizar(id, feedbackRecuperado, feedbackAtualizado) {
+        try {
+            const feedbackValidado = new FeedbackAtualizado(feedbackRecuperado, feedbackAtualizado)
+            const resposta = await this.feedbackAPIClient.updateFeedback(id, feedbackValidado)
+            return resposta
+        } catch (error) {
+            return { erro: error.message }
+        }
     }
 
     async listarPorGestorEColaborador(gestorId, colaboradorId) {
-        const feedbacksRecuperados =
-            await this.feedbackAPIClient.getFeedbacksByGestorIdAndColaboradorId(gestorId, colaboradorId)
-
-        return feedbacksRecuperados
+        try {
+            const respota = await this.feedbackAPIClient.getFeedbacksByGestorIdAndColaboradorId(gestorId, colaboradorId)
+            return respota
+        } catch (error) {
+            return { erro: error.message }
+        }
     }
 
     async listarPorColaborador(colaboradorId) {
-        const feedbacksRecuperados = await this.feedbackAPIClient.getFeedbacksByColaboradorId(colaboradorId)
-        return feedbacksRecuperados
+        try {
+            const resposta = await this.feedbackAPIClient.getFeedbacksByColaboradorId(colaboradorId)
+            return resposta
+        } catch (error) {
+            return { erro: error.message }
+        }
     }
 
     async recuperarPorId(id) {
-        const feedbackRecuperado = await this.feedbackAPIClient.getFeedbackById(id)
-        return feedbackRecuperado
+        try {
+            const resposta = await this.feedbackAPIClient.getFeedbackById(id)
+            return resposta
+        } catch (error) {
+            return { erro: error.message }
+        }    
     }
 
-
-    deletar(id) {
-        return 'deletado com sucesso'
+    async deletar(id) {
+        try {
+            const resposta = await this.feedbackAPIClient.deleteFeedback(id)
+            return resposta 
+        } catch (error) {
+            return { erro: error.message }
+        }
     }
 }
