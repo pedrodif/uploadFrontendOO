@@ -1,11 +1,15 @@
 import { Utils } from '../utils/main.js'
+
 import { Toast } from '../view/components/toast.js'
 import { Loader } from '../view/components/loader.js'
 
+import { FeedbackView } from '../view/feedbackView/main.js'
+import { FeedbackService } from '../service/feedbackService.js'
+
 export class FeedbackController {
-    constructor(feedbackModel, feedbackView) {
-        this.feedbackView = feedbackView 
-        this.feedbackModel = feedbackModel
+    constructor() {
+        this.feedbackView = new FeedbackView() 
+        this.feedbackService = new FeedbackService()
         this.feedbackRecuperado = null
     }
 
@@ -16,9 +20,9 @@ export class FeedbackController {
         const { colaboradorId, gestorId } = this.consultarParametros()
 
         if(!this.gestorId) {
-            feedbacks = await this.feedbackModel.listarPorColaborador(colaboradorId)
+            feedbacks = await this.feedbackService.listarPorColaborador(colaboradorId)
         } else {
-            feedbacks = await this.feedbackModel.listarPorGestorEColaborador(gestorId, colaboradorId)
+            feedbacks = await this.feedbackService.listarPorGestorEColaborador(gestorId, colaboradorId)
         }
 
         Loader.getLoader().hide()
@@ -35,11 +39,10 @@ export class FeedbackController {
         Loader.getLoader().show()
         const { colaboradorId, gestorId, monitorId } = this.consultarParametros()
 
-        const feedbackCriado = await this.feedbackModel.criar({
+        const feedbackCriado = await this.feedbackService.criar({
             ...feedback, 
-            dataCriacao: Utils.gerenciarData(),
-            colaboradorId: +colaboradorId,
-            gestorId: gestorId ? +gestorId : +monitorId
+            colaboradorId,
+            gestorId: gestorId ?? monitorId
         })
 
         Loader.getLoader().hide()
@@ -58,7 +61,7 @@ export class FeedbackController {
         Loader.getLoader().show()
         const { feedbackId } = this.consultarParametros()
 
-        this.feedbackRecuperado = await this.feedbackModel.recuperarPorId(feedbackId)
+        this.feedbackRecuperado = await this.feedbackService.recuperarPorId(feedbackId)
         Loader.getLoader().hide()
 
         if (!this.feedbackRecuperado) {
@@ -72,7 +75,7 @@ export class FeedbackController {
     async atualizar(feedback) {
         Loader.getLoader().show()
 
-        const feedbackAtualizado = await this.feedbackModel.atualizar(this.feedbackRecuperado.id, {
+        const feedbackAtualizado = await this.feedbackService.atualizar(this.feedbackRecuperado.id, {
             ...this.feedbackRecuperado,
             ...feedback,
             dataEdicao: Utils.gerenciarData()

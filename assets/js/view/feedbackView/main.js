@@ -16,9 +16,7 @@ export class FeedbackView {
         this.feedbackContainer.innerHTML = ''
 
         if(feedbacks.length > 0) {
-            feedbacks.reverse().forEach(feedback => {
-                this.feedbackContainer.appendChild(new FeedbackCard(feedback).montarFeedback())
-            })
+            feedbacks.reverse().forEach(feedback => this.feedbackContainer.appendChild(new FeedbackCard(feedback).montarFeedback()))
         }
     }
 

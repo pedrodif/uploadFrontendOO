@@ -1,4 +1,4 @@
-export class FeedbackRepository {
+export class FeedbackAPIClient {
     constructor() {
         this.urlBase = 'http://localhost:8080/feedbacks'
     }
