@@ -30,8 +30,8 @@ export class FeedbackService {
 
     async listarPorGestorEColaborador(gestorId, colaboradorId) {
         try {
-            const respota = await this.feedbackAPIClient.getFeedbacksByGestorIdAndColaboradorId(gestorId, colaboradorId)
-            return respota
+            const resposta = await this.feedbackAPIClient.getFeedbacksByGestorIdAndColaboradorId(gestorId, colaboradorId)
+            return resposta
         } catch (error) {
             return { erro: error.message }
         }

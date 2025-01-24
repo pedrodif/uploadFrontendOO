@@ -20,8 +20,13 @@ export class FeedbackAPIClient {
         }
         
         try {
-            const resposta = await fetch(`${this.URL_BASE}/gestor/${gestorId}/colaborador/${colaboradorId}`, this.HEADERS_DEFAULT)
-            return resposta.ok ? await resposta.json() : []
+            const resposta = await fetch(
+                    `${this.URL_BASE}/gestor/${gestorId}/colaborador/${colaboradorId}`, 
+                    this.HEADERS_DEFAULT
+                )
+            
+                return resposta.ok ? 
+                await resposta.json() : false
         } catch (error) {
             console.error(error)
         }
@@ -33,8 +38,13 @@ export class FeedbackAPIClient {
         }
 
         try {
-            const resposta = await fetch(`${this.URL_BASE}/colaborador/${colaboradorId}`, this.HEADERS_DEFAULT)
-            return resposta.ok ? await resposta.json() : []
+            const resposta = await fetch(
+                `${this.URL_BASE}/colaborador/${colaboradorId}`,
+                this.HEADERS_DEFAULT
+            )
+
+            return resposta.ok ? 
+            await resposta.json() : false
         } catch (error) {
             console.error(error)
         }
@@ -47,7 +57,9 @@ export class FeedbackAPIClient {
 
         try {
             const resposta = await fetch(`${this.URL_BASE}/${id}`, this.HEADERS_DEFAULT)
-            return resposta.json()
+
+            return resposta.ok ? 
+            await resposta.json() : false
         } catch (error) {
             console.error(error)
         }
@@ -65,7 +77,8 @@ export class FeedbackAPIClient {
                 body: JSON.stringify(feedback)
             })
             
-           return resposta.ok ? await resposta.json() : false
+           return resposta.ok ? 
+           await resposta.json() : false
         } catch (error) {
             console.error(error)
         }
@@ -83,7 +96,8 @@ export class FeedbackAPIClient {
                 body: JSON.stringify(feedback)
             })
 
-            return resposta.json()
+            return resposta.ok ? 
+            await resposta.json() : false
         } catch (error) {
             console.error(error)
         }
@@ -99,7 +113,8 @@ export class FeedbackAPIClient {
                 method: 'DELETE',
                 ...this.HEADERS_DEFAULT
             })
-            return await resposta.text()
+            return resposta.ok ? 
+            await resposta.text() : false
         } catch (error) {
             console.error(error)
         }
