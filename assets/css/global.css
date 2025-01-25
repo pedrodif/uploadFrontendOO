@@ -156,5 +156,20 @@ footer {
     font-size: 14px;
 }
 
+body::-webkit-scrollbar, .off-canvas::-webkit-scrollbar {
+    width: 12px;
+}
+  
+body::-webkit-scrollbar-track, .off-canvas::-webkit-scrollbar-track  {
+    background: var(--off);
+}
+  
+body::-webkit-scrollbar-thumb, .off-canvas::-webkit-scrollbar-thumb {
+    background-color: var(--green_dark);
+    border-radius: 20px;
+    border: 2px solid var(--off);
+}
+
+
 
 
