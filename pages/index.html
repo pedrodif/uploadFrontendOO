@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/9e7334b542.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="../assets/img/feedback-fusion-icon.svg" type="image/x-icon">
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/components/form.css">
     <link rel="stylesheet" href="../assets/css/components/toast.css">
@@ -11,7 +11,33 @@
     <title>Feedback</title>
 </head>
 <body>
-    <header></header>
+    <header>
+        <img src="../assets/img/feedback-fusion-logo.svg" alt="logo" class="logo">
+
+        <nav>
+            <button>
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <ul class="dropdown">
+                <li>
+                    <a href="#indicadores-desempenho">Indicadores Desempenho</a>
+                </li>
+
+                <li>
+                    <a href="#feedbacks-eviados">Feedbacks Enviados</a>
+                </li>
+
+                <li>
+                    <a href="#tarefas-atribuidas">Tarefas Atribuídas</a>
+                </li>
+
+                <li id="logout">
+                    <a href="/src/front/src/pages/index.html">Logout</a>
+                </li>
+            </ul>
+          </nav>
+    </header>
 
     <main>
         <section>
@@ -42,7 +68,7 @@
             </form>
         </section>
 
-        <section>
+        <section id="feedbacks-eviados">
             <h1>Feedbacks Enviados</h1>
             <div id="feedback-container"></div>
         </section>
@@ -50,5 +76,6 @@
 
     <footer></footer>
     <script type="module" src="../js/app/main.js"></script>
+    <script src="https://kit.fontawesome.com/9e7334b542.js" crossorigin="anonymous"></script>
 </body>
 </html>

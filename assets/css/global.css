@@ -29,16 +29,102 @@
     font-family: "Poppins", sans-serif;
 }
 
-main {
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--off);
+    user-select: none;
+}
+
+body > header {
+    padding: 16px;
+    background-color: var(--dark);
+    box-shadow: var(--box_shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap:760px;
+}
+
+body > header  > img {
+    background-color: var(--dark);
+}
+
+header nav {
+    position: relative;
+}
+
+header nav button {
+    width: 100%;
+}
+
+header nav ul.dropdown {
+    margin: 0;
+    padding: 15px;
+    width: 220px;
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 4px);
+    transform: translateX(-50%) rotateX(-90deg);
+    transform-origin: top center;
+    transition: all 150ms ease-in-out; 
+    opacity: 0;
+    background-color: var(--dark);
+    border-radius: var(--radius);
+    box-shadow: var(--box_shadow);
+    list-style: none;
+    z-index: 15;
+}
+
+header nav ul.dropdown > li > a {
+    text-decoration: none;
+    color: var(--white);
+    font-size: 14px;
+}
+
+header nav ul.dropdown > li > a:hover { 
+    text-decoration: underline;
+    color: var(--green_mid);
+}
+
+header nav button:hover ~ ul.dropdown, 
+header nav ul.dropdown:hover {
+    opacity: 1; 
+    transform: translateX(-50%) rotateX(0);
+    transition-timing-function: ease-out;
+}
+
+header nav ul.dropdown li:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+body > main {
     width: 80%;
     margin: 0 auto;
 }
 
 button {
     padding: 8px;  
-    border: none;   
+    border: none;
     cursor: pointer;
-    border-radius: 4.8px;
+    color: var(--green_light);
+    background-color: var(--accent);
+    border-radius: var(--radius);
+}
+
+button:hover {
+    opacity: var(--btn_opacity);
+}
+
+button:disabled {
+    opacity: 0.5;   
+    cursor: not-allowed; 
+}
+
+button > i {
+    margin-left: 2px;
 }
 
 

@@ -57,7 +57,7 @@ export class FeedbackController {
         } 
         
         Toast.getToast().show('Feedback criado com sucesso!', 'sucesso')
-        this.feedbackView.atualizarListaFeedbacks(feedbackCriado)
+        this.feedbackView.atualizarListaFeedbacks(resposta)
     }
 
     async atualizar(feedbackAtualizado) {
