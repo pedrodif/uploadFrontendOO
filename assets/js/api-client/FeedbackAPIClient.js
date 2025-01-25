@@ -7,7 +7,7 @@ export class FeedbackAPIClient {
         }
         this.HEADERS_JSON = {
             headers: {
-                ...HEADERS_DEFAULT.headers,
+                ...this.HEADERS_DEFAULT.headers,
                 'Content-Type': 'application/json',
             }
         }
