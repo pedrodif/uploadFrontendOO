@@ -127,5 +127,34 @@ button > i {
     margin-left: 2px;
 }
 
+section {
+    margin-top: 16px;
+    padding: 16px;
+}
+
+section > h1 {
+    margin-bottom: 16px;
+}
+
+div#feedback-container {
+    margin-top: 26px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+footer, footer > p {
+    background-color: var(--dark);
+}
+
+footer {
+    margin-top: 30px;
+    color: var(--main);
+    text-align: center;
+    padding: 48px;
+    font-size: 14px;
+}
+
 
 

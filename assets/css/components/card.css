@@ -1,0 +1,59 @@
+.feedback-card {
+    width: 230px;
+    margin: 0 10px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--box_shadow);
+}
+
+.feedback-card> header {
+    height: 60px;
+    padding:  16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--accent);
+    border-radius: var(--radius) var(--radius) 0 0;
+    color: var(--green_light);
+}
+
+.feedback-card > main {
+    height: 140px;
+    padding:  16px;
+}
+
+.feedback-card > main > section + section {
+    margin-top: 12px;
+    padding-left: 12px;
+    border-left: 3px solid var(--dimmed);
+    
+}
+
+.feedback-card > main > p, .feedback-card > main > section + section > p {
+    font-size: 12px;
+}
+
+.feedback-card > footer {
+    margin-top: 0;
+    padding: 16px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--white);
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+}
+
+.feedback-card > footer > button {
+    width: 100%;
+    background-color: var(--white);
+    border: solid 2px;
+    color: var(--accent);
+}
