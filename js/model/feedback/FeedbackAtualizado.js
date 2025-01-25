@@ -6,20 +6,22 @@ export class FeedbackAtualizado extends FeedbackModel {
 
     constructor(feedbackRecuperado, feedbackAtualizado) {
         super(feedbackAtualizado)
+        this.#validarAlteracao(feedbackRecuperado)
         this.dataEdicao = Utils.gerenciarData()
-        this.#validarAlteracao(feedbackRecuperado, feedbackAtualizado)
     }
 
     get dataEdicao() {
         return this.#dataEdicao
     }
     
-    #validarAlteracao(feedbackRecuperado, feedbackAtualizado) {
-        for(let campo in feedbackAtualizado) {
-            if(feedbackRecuperado[campo] === feedbackAtualizado[campo]) {
+    #validarAlteracao(feedbackRecuperado){
+        let campos = ['titulo', 'descricao']
+
+        campos.forEach(campo => {
+            if(feedbackRecuperado[campo] === this[campo]) {
                 throw new Error(`O campo ${campo} não foi alterado.`)
             }
-        }
+        })
     }
 
     toJSON() {
