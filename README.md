@@ -1,4 +1,4 @@
-# uploadFrontendPOO - Estrutura do Projeto  
+# Estrutura do Projeto  
 
 Este projeto foi desenvolvido utilizando uma arquitetura modular que segue os princípios de separação de responsabilidades. A estrutura está organizada em camadas para facilitar a manutenção e escalabilidade do código. Abaixo, serão descritas suas pastas e seu propósito:  
 
