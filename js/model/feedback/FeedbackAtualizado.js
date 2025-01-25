@@ -16,12 +16,10 @@ export class FeedbackAtualizado extends FeedbackModel {
     
     #validarAlteracao(feedbackRecuperado){
         let campos = ['titulo', 'descricao']
-
-        campos.forEach(campo => {
-            if(feedbackRecuperado[campo] === this[campo]) {
-                throw new Error(`O campo ${campo} não foi alterado.`)
-            }
-        })
+        
+        if(campos.every(campo => feedbackRecuperado[campo] === this[campo])) {
+            throw new Error('Nenhum dos campos foi alterado.')
+        }
     }
 
     toJSON() {
