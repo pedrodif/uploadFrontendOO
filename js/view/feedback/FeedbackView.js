@@ -1,4 +1,4 @@
-import { Utils } from '../../Utils.js'
+import { Utils } from '../../utils/Utils.js'
 import { FeedbackCard } from './FeedbackCard.js'
 import { FeedbackForm } from './FeedbackForm.js'
 

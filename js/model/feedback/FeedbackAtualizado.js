@@ -1,4 +1,4 @@
-import { Utils } from '../../Utils.js'
+import { Utils } from '../../utils/Utils.js'
 import { FeedbackModel } from './FeedbackModel.js'
 
 export class FeedbackAtualizado extends FeedbackModel {

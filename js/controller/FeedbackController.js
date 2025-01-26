@@ -1,4 +1,4 @@
-import { Utils } from '../Utils.js'
+import { Utils } from '../utils/Utils.js'
 import { Toast } from '../view/components/Toast.js'
 import { Loader } from '../view/components/Loader.js'
 
