@@ -11,7 +11,7 @@ export class FeedbackService {
     async criar(feedback) {
         try {
             const feedbackValidado = new FeedbackNovo(feedback)
-            const resposta = await this.feedbackAPIClient.createFeedback(feedbackValidado)
+            const resposta = await this.feedbackAPIClient.post(feedbackValidado)
             return resposta
         } catch (error) {
             return { erro: error.message }
@@ -21,7 +21,7 @@ export class FeedbackService {
     async atualizar(id, feedbackRecuperado, feedbackAtualizado) {
         try {
             const feedbackValidado = new FeedbackAtualizado(feedbackRecuperado, feedbackAtualizado)
-            const resposta = await this.feedbackAPIClient.updateFeedback(id, feedbackValidado)
+            const resposta = await this.feedbackAPIClient.put(id, feedbackValidado)
             return resposta
         } catch (error) {
             return { erro: error.message }
@@ -30,7 +30,7 @@ export class FeedbackService {
 
     async listarPorGestorEColaborador(gestorId, colaboradorId) {
         try {
-            const resposta = await this.feedbackAPIClient.getFeedbacksByGestorIdAndColaboradorId(gestorId, colaboradorId)
+            const resposta = await this.feedbackAPIClient.getByGestorAndColaboradorId(gestorId, colaboradorId)
             return resposta
         } catch (error) {
             return { erro: error.message }
@@ -39,7 +39,7 @@ export class FeedbackService {
 
     async listarPorColaborador(colaboradorId) {
         try {
-            const resposta = await this.feedbackAPIClient.getFeedbacksByColaboradorId(colaboradorId)
+            const resposta = await this.feedbackAPIClient.getByColaboradorId(colaboradorId)
             return resposta
         } catch (error) {
             return { erro: error.message }
@@ -48,7 +48,7 @@ export class FeedbackService {
 
     async recuperarPorId(id) {
         try {
-            const resposta = await this.feedbackAPIClient.getFeedbackById(id)
+            const resposta = await this.feedbackAPIClient.getById(id)
             return resposta
         } catch (error) {
             return { erro: error.message }
@@ -57,7 +57,7 @@ export class FeedbackService {
 
     async deletar(id) {
         try {
-            const resposta = await this.feedbackAPIClient.deleteFeedback(id)
+            const resposta = await this.feedbackAPIClient.delete(id)
             return resposta 
         } catch (error) {
             return { erro: error.message }

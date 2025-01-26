@@ -14,7 +14,7 @@ export class FeedbackAPIClient {
         this.URL_BASE = 'http://localhost:8080/feedbacks'
     }
 
-    async getFeedbacksByGestorIdAndColaboradorId(gestorId, colaboradorId) {
+    async getByGestorAndColaboradorId(gestorId, colaboradorId) {
         if (!gestorId || !colaboradorId) {
             throw new Error('Gestor ID e Colaborador ID são obrigatórios.')
         }
@@ -32,7 +32,7 @@ export class FeedbackAPIClient {
         }
     }
 
-    async getFeedbacksByColaboradorId(colaboradorId) {
+    async getByColaboradorId(colaboradorId) {
         if (!colaboradorId) {
             throw new Error('Colaborador ID obrigatório.')
         }
@@ -50,7 +50,7 @@ export class FeedbackAPIClient {
         }
     }
 
-    async getFeedbackById(id) {
+    async getById(id) {
         if (!id) {
             throw new Error('O Feeback ID é obrigatório.')
         }
@@ -65,7 +65,7 @@ export class FeedbackAPIClient {
         }
     }
 
-    async createFeedback(feedback) {
+    async post(feedback) {
         if (!feedback) {
             throw new Error('O Feeback é obrigatório.')
         }
@@ -84,7 +84,7 @@ export class FeedbackAPIClient {
         }
     }
 
-    async updateFeedback(id, feedback) {
+    async put(id, feedback) {
         if (!id) {
             throw new Error('O Feeback ID é obrigatório.')
         }
@@ -103,7 +103,7 @@ export class FeedbackAPIClient {
         }
     }
 
-    async deleteFeedback(id) {
+    async delete(id) {
         if (!id) {
             throw new Error('O Feeback ID é obrigatório.')
         }
