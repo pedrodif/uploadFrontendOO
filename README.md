@@ -22,5 +22,5 @@ A pasta `js` contém toda a lógica de programação e está organizada em subpa
 - **model**: Representa os dados e lógica de negócios da aplicação.  
 - **service**: Atua como uma ponte entre a **controller**, a **model** e o **api-client**, orquestrando todas as operações.  
 - **view**: Responsável por renderizar a interface para o usuário.  
-- **Utils**: Utilitários.  
+- **utils**: Utilitários.  
 
