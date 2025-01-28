@@ -13,7 +13,7 @@ Nesta pasta estão armazenados os recursos estáticos, como:
 - **img**: Recursos de imagem utilizados no projeto.  
 
 ## 3. **JS**  
-![Diagrama](assets/uml/diagrama-arq-front-poo.png "Diagrama")
+![Diagrama](/assets/uml/diagrama-arq-front-poo.png "Diagrama")
 
 A pasta `js` contém toda a lógica de programação e está organizada em subpastas que seguem o padrão MVC (Model-View-Controller) com extensões:  
 - **api-client**: Lida com a comunicação com APIs externas.  
@@ -22,6 +22,5 @@ A pasta `js` contém toda a lógica de programação e está organizada em subpa
 - **model**: Representa os dados e lógica de negócios da aplicação.  
 - **service**: Atua como uma ponte entre a **controller**, a **model** e o **api-client**, orquestrando todas as operações.  
 - **view**: Responsável por renderizar a interface para o usuário.  
-- `Utils.js`: Biblioteca de funções utilitárias.  
+- **utils**: Utilitários.  
 
-Essa estrutura foi desenhada para manter o projeto organizado e facilitar o desenvolvimento colaborativo.  
