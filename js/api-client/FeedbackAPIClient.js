@@ -113,6 +113,7 @@ export class FeedbackAPIClient {
                 method: 'DELETE',
                 ...this.HEADERS_DEFAULT
             })
+            
             return resposta.ok ? 
             await resposta.text() : false
         } catch (error) {
