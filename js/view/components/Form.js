@@ -9,16 +9,20 @@ export class Form {
         this.form.reset()
     }
 
-    submit(callback) {
-        this.form.addEventListener('submit', evento => {
+    submit(callback) {     
+        this.form.removeEventListener('submit', this.handleSubmit)
+
+        this.handleSubmit = async (evento) => {
             evento.preventDefault()
             const dadosRecuperados = Utils.lerDadosForm(evento.target)
             
             if(this.validarForm(dadosRecuperados)) {
-                callback(dadosRecuperados)
+                await callback(dadosRecuperados)
                 this.limparForm()
             }  
-        })
+        }
+
+        this.form.addEventListener('submit', this.handleSubmit)
     }
 
     montarMensagemErro() {
