@@ -14,13 +14,13 @@ export class FeedbackController {
         this.feedbackRecuperado = null
     }
 
-    gerenciarForm() {    
+    gerenciarForm(variante = 'perfil') {    
         const { modo } = Url.consultarParametros()
 
         switch (modo) {
             case 'detalhes':
                 this.recuperarFeedbackPorId()
-                this.feedbackView.getForm().submit(this.atualizar.bind(this))
+                if (variante == 'detalhes') this.feedbackView.getForm().submit(this.atualizar.bind(this))
                 break
             default:
                 this.feedbackView.getForm().definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
@@ -48,7 +48,7 @@ export class FeedbackController {
             return
         }
         
-        this.feedbackView.listarFeedbacks(resposta, this.gerenciarForm.bind(this))
+        this.feedbackView.listarFeedbacks(resposta, this.gerenciarForm.bind(this), variante)
     }
 
     async criar(feedback) {
@@ -75,7 +75,7 @@ export class FeedbackController {
         
         Toast.getToast().show('Feedback criado com sucesso!', 'sucesso')
         this.feedbackView.atualizarListaFeedbacks(resposta, this.gerenciarForm.bind(this))
-        this.gerenciarForm()
+        this.gerenciarForm('detalhes')
     }
 
     async atualizar(feedbackAtualizado) {
@@ -93,13 +93,11 @@ export class FeedbackController {
 
         if(resposta?.erro) {
             Toast.getToast().show(resposta.erro, 'erro')
-            this.gerenciarForm()
             return
         }
         
         if(!resposta) {
             Toast.getToast().show('Erro ao atualizar feedback.', 'erro')
-            this.gerenciarForm()
             return 
         }
 
@@ -107,7 +105,9 @@ export class FeedbackController {
 
         Url.adicionarParametroURL('modo', 'criar')
         Url.removerParametroURL('feedbackId')
-        this.gerenciarForm()
+        
+        this.listarFeedbacks('detalhes')
+        this.gerenciarForm('detalhes')
     }
 
     async recuperarFeedbackPorId() {
