@@ -42,20 +42,6 @@ export class Form {
         }   
     }
 
-    // genrenciarVisibilidadeCampos({ campos, display = 'none' }) {
-    //     const camposArray = campos.split(',')
-    //     // const camposRecuperados = camposArray.reduce((acc, campo) => 
-    //     //     [ ...acc, 
-    //     //         this.form.querySelector(`#${campo.trim()}`)
-    //     //     ], 
-    //     // [])
-
-    //     camposArray.forEach(campo => this.form.querySelector(`#${campo.trim()}`).style.display = display )
-    //     console.table(camposArray)
-
-    //     Utils.gerenciarVisibilidade(camposRecuperados, display)
-    // }
-
     definirValoresIniciais(valoresIniciais) {
         const campos = this.form.querySelectorAll('input, select, textarea')
 
