@@ -59,17 +59,6 @@ export class Utils {
         return dadosRecuperados
     }
 
-    static adicionarParametroURL(parametro, valor) {
-        const urlAtual = new URL(window.location.href)
-        urlAtual.searchParams.set(parametro, valor)
-        window.history.pushState({}, '', urlAtual)
-    }
-    
-    static removerParametroURL(parametro) {
-        buscarParametro.delete(parametro)
-        window.history.replaceState({}, '', window.location.pathname + '?' + buscarParametro.toString())
-    }
-
     static gerenciarVisibilidade(campos, display = 'none') {
         campos.forEach(campo => campo.style.display = display)
     }

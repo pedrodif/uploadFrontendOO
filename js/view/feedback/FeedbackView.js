@@ -12,15 +12,15 @@ export class FeedbackView {
         return this.form
     }
 
-    listarFeedbacks(feedbacks) {
+    listarFeedbacks(feedbacks, callback) {
         this.feedbackContainer.innerHTML = ''
 
         if(feedbacks.length > 0) {
-            feedbacks.reverse().forEach(feedback => this.feedbackContainer.appendChild(new FeedbackCard(feedback).montarFeedback()))
+            feedbacks.reverse().forEach(feedback => this.feedbackContainer.appendChild(new FeedbackCard(feedback).montarFeedback(callback)))
         }
     }
 
-    atualizarListaFeedbacks(feedback) {
-        this.feedbackContainer.prepend(new FeedbackCard(feedback).montarFeedback())
+    atualizarListaFeedbacks(feedback, callback) {
+        this.feedbackContainer.prepend(new FeedbackCard(feedback).montarFeedback(callback))
     }
 }

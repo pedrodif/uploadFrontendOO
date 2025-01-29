@@ -1,3 +1,4 @@
+import { Url } from '../../utils/Url.js'
 import { Utils } from '../../utils/Utils.js'
 
 export class FeedbackCard {
@@ -5,7 +6,7 @@ export class FeedbackCard {
         this.feedback = feedback
     }
 
-    montarFeedback() {
+    montarFeedback(callback) {
         const h2 = Utils.criarElemento('h2')
         h2.textContent = Utils.formatarDataBR(this.feedback.dataEdicao ?? this.feedback.dataCriacao)
         
@@ -31,8 +32,9 @@ export class FeedbackCard {
         button.type = 'button'
         button.textContent = 'Ver mais'
         button.addEventListener('click', () => {
-            Utils.adicionarParametroURL('modo', 'detalhes')
-            Utils.adicionarParametroURL('feedbackId', this.feedback.id)
+            Url.adicionarParametroURL('modo', 'detalhes')
+            Url.adicionarParametroURL('feedbackId', this.feedback.id)
+            callback()
         })
 
         button.appendChild(i)

@@ -5,13 +5,17 @@ export class FeedbackAtualizado extends FeedbackModel {
     #dataEdicao
 
     constructor(feedbackRecuperado, feedbackAtualizado) {
-        super(feedbackAtualizado)
+        super({ ...feedbackRecuperado, ...feedbackAtualizado })
         this.#validarAlteracao(feedbackRecuperado)
         this.dataEdicao = Utils.gerenciarData()
     }
 
     get dataEdicao() {
         return this.#dataEdicao
+    }
+
+    set dataEdicao(dataEdicao) {
+        this.#dataEdicao = dataEdicao
     }
     
     #validarAlteracao(feedbackRecuperado){
@@ -25,7 +29,7 @@ export class FeedbackAtualizado extends FeedbackModel {
     toJSON() {
         return {
             ...super.toJSON(),
-            dataCriacao: this.dataEdicao,
+            dataEdicao: this.dataEdicao,
         }
     }
 }

@@ -1,4 +1,6 @@
+import { Url } from '../utils/Url.js'
 import { Utils } from '../utils/Utils.js'
+
 import { Toast } from '../view/components/Toast.js'
 import { Loader } from '../view/components/Loader.js'
 
@@ -12,9 +14,24 @@ export class FeedbackController {
         this.feedbackRecuperado = null
     }
 
+    gerenciarForm() {    
+        const { modo } = Url.consultarParametros()
+
+        switch (modo) {
+            case 'detalhes':
+                this.recuperarFeedbackPorId()
+                this.feedbackView.getForm().submit(this.atualizar.bind(this))
+                break
+            default:
+                this.feedbackView.getForm().definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
+                this.feedbackView.getForm().submit(this.criar.bind(this))
+                break
+        }
+    }
+
     async listarFeedbacks(variante = 'perfil') {
         Loader.getLoader().show()
-        const { colaboradorId, gestorId } = this.consultarParametros()
+        const { colaboradorId, gestorId } = Url.consultarParametros()
     
         const resposta = variante === 'perfil' ? await this.feedbackService.listarPorColaborador(colaboradorId)
             : await this.feedbackService.listarPorGestorEColaborador(gestorId, colaboradorId)
@@ -31,12 +48,12 @@ export class FeedbackController {
             return
         }
         
-        this.feedbackView.listarFeedbacks(resposta)
+        this.feedbackView.listarFeedbacks(resposta, this.gerenciarForm.bind(this))
     }
 
     async criar(feedback) {
         Loader.getLoader().show()
-        const { colaboradorId, gestorId, monitorId } = this.consultarParametros()
+        const { colaboradorId, gestorId, monitorId } = Url.consultarParametros()
 
         const resposta = await this.feedbackService.criar({
             ...feedback, 
@@ -57,7 +74,7 @@ export class FeedbackController {
         } 
         
         Toast.getToast().show('Feedback criado com sucesso!', 'sucesso')
-        this.feedbackView.atualizarListaFeedbacks(resposta)
+        this.feedbackView.atualizarListaFeedbacks(resposta, this.gerenciarForm.bind(this))
     }
 
     async atualizar(feedbackAtualizado) {
@@ -75,28 +92,29 @@ export class FeedbackController {
 
         if(resposta?.erro) {
             Toast.getToast().show(resposta.erro, 'erro')
+            this.gerenciarForm()
             return
         }
         
         if(!resposta) {
             Toast.getToast().show('Erro ao atualizar feedback.', 'erro')
+            this.gerenciarForm()
             return 
         }
 
-        Toast.getToast().show('eedback atualizado com sucesso!', 'sucesso')
-        // Utils.adicionarParametroURL('modo', 'criar')
-        this.listarFeedbacks()
+        Toast.getToast().show('Feedback atualizado com sucesso!', 'sucesso')
     }
 
     async recuperarFeedbackPorId() {
         Loader.getLoader().show()
-        const { feedbackId } = this.consultarParametros()
+        const { feedbackId } = Url.consultarParametros()
 
+        this.feedbackRecuperado = null
         this.feedbackRecuperado = await this.feedbackService.recuperarPorId(feedbackId)
         Loader.getLoader().hide()
 
         if(this.feedbackRecuperado?.erro) {
-            Toast.getToast().show(resposta.erro, 'erro')
+            Toast.getToast().show(this.feedbackRecuperado.erro, 'erro')
             return
         }
 
@@ -106,34 +124,5 @@ export class FeedbackController {
         }
 
         this.feedbackView.getForm().definirValoresIniciais(this.feedbackRecuperado)
-    }
-
-    
-    consultarParametros() {
-        const urlParams = new URLSearchParams(window.location.search)
-    
-        return {
-            modo: urlParams.get("modo"),
-            gestorId: urlParams.get("gestorId"),
-            monitorId: urlParams.get("monitorId"),
-            feedbackId: urlParams.get("feedbackId"),
-            colaboradorId: urlParams.get("colaboradorId")
-        }
-    }
-
-    gerenciarForm() {    
-        const { modo } = this.consultarParametros()
-
-        switch (modo) {
-            case 'detalhes':
-                this.recuperarFeedbackPorId()
-                this.feedbackView.getForm().submit(this.atualizar.bind(this))
-                break
-            default:
-                this.feedbackView.getForm().definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
-                // this.feedbackView.getForm().genrenciarVisibilidadeCampos({ campos: 'dataEdicao' })
-                this.feedbackView.getForm().submit(this.criar.bind(this))
-                break
-        }
-    }
+    }  
 }

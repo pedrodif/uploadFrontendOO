@@ -30,7 +30,7 @@ export class Loader {
     }
 
     hide() {
-        this.loader.firstChild.remove()
+        this.loader.firstChild?.remove()
         this.loader.style.display = 'none'
     }
 
