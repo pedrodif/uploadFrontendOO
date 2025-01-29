@@ -16,16 +16,13 @@ export class FeedbackController {
 
     gerenciarForm() {    
         const { modo } = Url.consultarParametros()
-        console.log(modo)
 
         switch (modo) {
             case 'detalhes':
-                console.log('Modo de detalhes, recuperando feedback');
                 this.recuperarFeedbackPorId()
                 this.feedbackView.getForm().submit(this.atualizar.bind(this))
                 break
             default:
-                console.log('Modo padrão (criar)');
                 this.feedbackView.getForm().definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
                 this.feedbackView.getForm().submit(this.criar.bind(this))
                 break
@@ -55,8 +52,6 @@ export class FeedbackController {
     }
 
     async criar(feedback) {
-        console.log('Método de criação chamado');
-
         Loader.getLoader().show()
         const { colaboradorId, gestorId, monitorId } = Url.consultarParametros()
 
@@ -80,11 +75,10 @@ export class FeedbackController {
         
         Toast.getToast().show('Feedback criado com sucesso!', 'sucesso')
         this.feedbackView.atualizarListaFeedbacks(resposta, this.gerenciarForm.bind(this))
+        this.gerenciarForm()
     }
 
     async atualizar(feedbackAtualizado) {
-        console.log('Método de atualização chamado');
-
         Loader.getLoader().show()
         const { id } = this.feedbackRecuperado
 
@@ -110,6 +104,10 @@ export class FeedbackController {
         }
 
         Toast.getToast().show('Feedback atualizado com sucesso!', 'sucesso')
+
+        Url.adicionarParametroURL('modo', 'criar')
+        Url.removerParametroURL('feedbackId')
+        this.gerenciarForm()
     }
 
     async recuperarFeedbackPorId() {
