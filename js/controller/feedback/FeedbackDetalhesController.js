@@ -10,9 +10,7 @@ export class FeedbackDetalhesController extends FeedbackController {
     }
 
     gerenciarForm() {
-        console.log('entri aqui')
         const { modo } = Url.consultarParametros()
-        console.log({modo})
         
         const form = this.feedbackView.getForm()
         form.configurar(modo)
@@ -47,7 +45,7 @@ export class FeedbackDetalhesController extends FeedbackController {
         if (resposta) {
             Url.adicionarParametroURL('modo', 'criar')
             Url.removerParametroURL('feedbackId')
-            await this.listarFeedbacks()
+            this.listarFeedbacks()
             this.gerenciarForm()
         }
     }

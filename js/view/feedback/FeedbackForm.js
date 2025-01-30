@@ -10,7 +10,7 @@ export class FeedbackForm extends Form {
 
     configurar(variante) {
         this.configurarBotao(variante)
-
+        
         switch (variante) {
             case 'detalhes':
                 this.montarCampos()

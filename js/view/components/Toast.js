@@ -2,8 +2,10 @@ import { Utils } from '../../utils/Utils.js'
 
 export class Toast {
     constructor() {
-        this.container = this.montarContainer()
         Toast.INSTANCIA = this
+        this.container = this.montarContainer()
+        this.fila = [] 
+        this.exibindo = false 
     }
 
     montarContainer() {
@@ -24,17 +26,29 @@ export class Toast {
         return toast
     }
 
-    show(mensagem, tipo = 'info') {
-        if (this.container.children.length === 3) {
-            this.container.firstChild.remove()
+    show(mensagem, tipo) {
+        const toast = this.montarToast(mensagem, tipo)
+        this.fila.push(toast)
+
+        if (!this.exibindo) {
+            this.exibindo = true
+            this.proximo()
+        }
+    }
+
+    proximo() {
+        if (this.fila.length === 0) {
+            this.exibindo = false
+            return
         }
 
-        const toast = this.montarToast(mensagem, tipo)
+        const toast = this.fila.shift()
         this.container.appendChild(toast)
 
         setTimeout(() => {
             toast.remove()
-        }, 4000)
+            this.proximo()
+        }, 2000)
     }
 
     static getToast() {
