@@ -1,7 +1,7 @@
 import { Url } from "../../utils/Url.js"
 
-import { FeedbackController } from "./FeedbackController.js"
 import { FeedbackView } from "../view/FeedbackView.js"
+import { FeedbackController } from "./FeedbackController.js"
 import { FeedbackService } from "../../service/FeedbackService.js"
 
 export class FeedbackDetalhesController extends FeedbackController {
@@ -11,15 +11,16 @@ export class FeedbackDetalhesController extends FeedbackController {
 
     gerenciarForm() {
         const { modo } = Url.consultarParametros()
+        const form = this.feedbackView.getForm()
 
         switch (modo) {
             case 'detalhes':
                 this.recuperarFeedbackPorId()
-                this.feedbackView.getForm().submit(this.atualizar.bind(this))
+                form.submit(this.atualizar.bind(this))
                 break
             default:
-                this.feedbackView.getForm().definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
-                this.feedbackView.getForm().submit(this.criar.bind(this))
+                form.definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
+                form.submit(this.criar.bind(this))
                 break
         }
     }
@@ -31,11 +32,10 @@ export class FeedbackDetalhesController extends FeedbackController {
         }
     }
 
-    async criar(feedback) {
-        const resposta = await super.criar(feedback)
+    async recuperarFeedbackPorId() {
+        const resposta = await super.recuperarFeedbackPorId()
         if (resposta) {
-            this.getFeedbackView().atualizarListaFeedbacks(resposta, this.gerenciarForm.bind(this))
-            this.gerenciarForm()
+            this.getFeedbackView().getForm().definirValoresIniciais(resposta)
         }
     }
 
@@ -49,10 +49,11 @@ export class FeedbackDetalhesController extends FeedbackController {
         }
     }
 
-    async recuperarFeedbackPorId() {
-        const resposta = await super.recuperarFeedbackPorId()
+    async criar(feedback) {
+        const resposta = await super.criar(feedback)
         if (resposta) {
-            this.getFeedbackView().getForm().definirValoresIniciais(resposta)
+            this.getFeedbackView().atualizarListaFeedbacks(resposta, this.gerenciarForm.bind(this))
+            this.gerenciarForm()
         }
     }
 }

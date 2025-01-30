@@ -35,17 +35,6 @@ export class FeedbackController {
         return this.feedbackRecuperado
     }
 
-    async criar(feedback) {
-        const { colaboradorId, gestorId, monitorId } = Url.consultarParametros()
-
-        const resposta = await RequestHelper.executar(
-            () => this.feedbackService.criar({ ...feedback, colaboradorId, gestorId: gestorId ?? monitorId })
-        )
-
-        Notificador.resposta(resposta, 'criar')
-        return resposta
-    }
-
     async atualizar(feedbackAtualizado) {
         const { id } = this.feedbackRecuperado
 
@@ -54,6 +43,17 @@ export class FeedbackController {
         )
 
         Notificador.resposta(resposta, 'atualizar')
+        return resposta
+    }
+
+    async criar(feedback) {
+        const { colaboradorId, gestorId, monitorId } = Url.consultarParametros()
+
+        const resposta = await RequestHelper.executar(
+            () => this.feedbackService.criar({ ...feedback, colaboradorId, gestorId: gestorId ?? monitorId })
+        )
+
+        Notificador.resposta(resposta, 'criar')
         return resposta
     }
 }
