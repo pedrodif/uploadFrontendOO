@@ -10,8 +10,12 @@ export class FeedbackDetalhesController extends FeedbackController {
     }
 
     gerenciarForm() {
+        console.log('entri aqui')
         const { modo } = Url.consultarParametros()
+        console.log({modo})
+        
         const form = this.feedbackView.getForm()
+        form.configurar(modo)
 
         switch (modo) {
             case 'detalhes':
@@ -19,7 +23,6 @@ export class FeedbackDetalhesController extends FeedbackController {
                 form.submit(this.atualizar.bind(this))
                 break
             default:
-                // form.definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
                 form.submit(this.criar.bind(this))
                 break
         }
@@ -44,7 +47,7 @@ export class FeedbackDetalhesController extends FeedbackController {
         if (resposta) {
             Url.adicionarParametroURL('modo', 'criar')
             Url.removerParametroURL('feedbackId')
-            this.listarFeedbacks()
+            await this.listarFeedbacks()
             this.gerenciarForm()
         }
     }

@@ -29,7 +29,7 @@ export class Notificador  {
             return
         }
 
-        if(variante != 'listar' || variante != 'recuperar') {
+        if(variante != 'listar' && variante != 'recuperar') {
             Notificador.sucesso(MENSAGENS_FEEDBACK[variante].sucesso)
         }
     }
