@@ -6,11 +6,13 @@ export class FeedbackForm extends Form {
     constructor(form) {
         super(form)
         this.btnSubmit = Utils.consultarSeletor('button[type=submit]')
+        this.textArea = Utils.consultarSeletor('textarea')
+        this.redimensionarCampos()
     }
 
     configurar(variante) {
         this.configurarBotao(variante)
-        
+
         switch (variante) {
             case 'detalhes':
                 this.montarCampos()
@@ -21,7 +23,7 @@ export class FeedbackForm extends Form {
                 break
         }
     }
-
+    
     fluxoEdicao() {
         this.desabilitarCampos(false)
         this.btnSubmit.textContent = 'Salvar Alterações'
@@ -85,6 +87,12 @@ export class FeedbackForm extends Form {
                 ...valoresIniciais, dataEdicao: Utils.gerenciarData()
             }
         )
+    }
+
+    redimensionarCampos() {
+        this.textArea.addEventListener('input', (evento) => {
+            Utils.redimensionarAltura(evento.target)
+        })
     }
 
     validarForm(dados) {
