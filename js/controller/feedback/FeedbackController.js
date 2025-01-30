@@ -1,6 +1,7 @@
-import { Url } from '../utils/Url.js'
-import { Notificador } from '../utils/Notificador.js'
-import { RequestHelper } from '../utils/RequestHelper.js'
+import { Url } from '../../utils/Url.js'
+import { Notificador } from '../../utils/Notificador.js'
+import { RequestHelper } from '../../utils/RequestHelper.js'
+
 export class FeedbackController {
     constructor(feedbackView, feedbackService) {
         this.feedbackView = feedbackView

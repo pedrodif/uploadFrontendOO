@@ -1,8 +1,8 @@
-import { Url } from "../utils/Url.js"
+import { Url } from "../../utils/Url.js"
 
-import { FeedbackController } from "./FeedbackController"
+import { FeedbackController } from "./FeedbackController.js"
 import { FeedbackView } from "../view/FeedbackView.js"
-import { FeedbackService } from "../service/FeedbackService.js"
+import { FeedbackService } from "../../service/FeedbackService.js"
 
 export class FeedbackDetalhesController extends FeedbackController {
     constructor() {
