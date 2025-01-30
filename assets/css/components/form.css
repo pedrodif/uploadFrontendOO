@@ -25,6 +25,10 @@ textarea {
     resize: none;
 }
 
+input:disabled, textarea:disabled {
+    background-color: var(--white);
+}
+
 fieldset {
    border: none;
    align-self: flex-end;

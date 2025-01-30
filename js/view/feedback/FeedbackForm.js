@@ -33,8 +33,13 @@ export class FeedbackForm extends Form {
     }
 
     fluxoDetalhes() {
+        this.desabilitarCampos(true)
         this.btnSubmit.textContent = 'Editar'
-        this.btnSubmit.addEventListener('click', this.eventoClick.bind(this))
+
+        if (!this.btnSubmit.hasAttribute('evento-configurado')) {
+            this.btnSubmit.addEventListener('click', this.eventoClick.bind(this))
+            this.btnSubmit.setAttribute('evento-configurado', 'true')
+        }
     }
 
     eventoClick(evento) {
@@ -47,16 +52,9 @@ export class FeedbackForm extends Form {
         }
     }
 
-    configurarBotao(variante) {
-        if (!this.eventoVinculado) {
-            this.eventoVinculado = this.eventoClick.bind(this)
-        }
-
-        this.btnSubmit.removeEventListener('click', this.eventoVinculado)
-
+    configurarBotao(variante) {        
         if (variante === 'detalhes') {
             this.fluxoDetalhes()
-            this.desabilitarCampos(true)
         } else {
             this.btnSubmit.textContent = 'Criar'
         }
