@@ -1,12 +1,12 @@
 import { Url } from "../../utils/Url.js"
 
-import { FeedbackView } from "../view/FeedbackView.js"
 import { FeedbackController } from "./FeedbackController.js"
 import { FeedbackService } from "../../service/FeedbackService.js"
+import { FeedbackDetalhesView } from '../../view/feedback/FeedbackDetalhesView.js'
 
 export class FeedbackDetalhesController extends FeedbackController {
     constructor() {
-        super(new FeedbackView(), new FeedbackService())
+        super(new FeedbackService(), new FeedbackDetalhesView())
     }
 
     gerenciarForm() {
@@ -19,7 +19,7 @@ export class FeedbackDetalhesController extends FeedbackController {
                 form.submit(this.atualizar.bind(this))
                 break
             default:
-                form.definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
+                // form.definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
                 form.submit(this.criar.bind(this))
                 break
         }

@@ -2,7 +2,7 @@ import { Utils } from '../../utils/Utils.js'
 import { FeedbackCard } from './FeedbackCard.js'
 import { FeedbackForm } from './FeedbackForm.js'
 
-export class FeedbackView {
+export class FeedbackDetalhesView {
     constructor() {
         this.feedbackContainer = Utils.consultarSeletor('#feedback-container')
         this.form = new FeedbackForm(Utils.consultarSeletor('#feedback-form'))

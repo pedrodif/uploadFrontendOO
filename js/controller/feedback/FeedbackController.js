@@ -3,7 +3,7 @@ import { Notificador } from '../../utils/Notificador.js'
 import { RequestHelper } from '../../utils/RequestHelper.js'
 
 export class FeedbackController {
-    constructor(feedbackView, feedbackService) {
+    constructor(feedbackService, feedbackView) {
         this.feedbackView = feedbackView
         this.feedbackService = feedbackService
         this.feedbackRecuperado = null
