@@ -21,5 +21,4 @@ export class Url {
         buscarParametro.delete(parametro)
         window.history.replaceState({}, '', window.location.pathname + '?' + buscarParametro.toString())
     }
-
 }

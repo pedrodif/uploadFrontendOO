@@ -1,5 +1,7 @@
 import { Url } from '../utils/Url.js'
 import { Utils } from '../utils/Utils.js'
+import { Notificador } from '../utils/Notificador.js'
+import { RequestHelper } from '../utils/RequestHelper.js'
 
 import { Toast } from '../view/components/Toast.js'
 import { Loader } from '../view/components/Loader.js'
@@ -8,13 +10,13 @@ import { FeedbackView } from '../view/feedback/FeedbackView.js'
 import { FeedbackService } from '../service/FeedbackService.js'
 
 export class FeedbackController {
-    constructor() {
-        this.feedbackView = new FeedbackView() 
+    constructor(feedbackView) {
+        this.feedbackView = new FeedbackView()
         this.feedbackService = new FeedbackService()
         this.feedbackRecuperado = null
     }
 
-    gerenciarForm(variante = 'perfil') {    
+    gerenciarForm(variante = 'perfil') {
         const { modo } = Url.consultarParametros()
 
         switch (modo) {
@@ -29,26 +31,17 @@ export class FeedbackController {
         }
     }
 
-    async listarFeedbacks(variante = 'perfil') {
-        Loader.getLoader().show()
+    async listarFeedbacks() {
         const { colaboradorId, gestorId } = Url.consultarParametros()
-    
-        const resposta = variante === 'perfil' ? await this.feedbackService.listarPorColaborador(colaboradorId)
-            : await this.feedbackService.listarPorGestorEColaborador(gestorId, colaboradorId)
-    
-        Loader.getLoader().hide()
 
-        if(resposta?.erro) {
-            Toast.getToast().show(resposta.erro, 'erro')
-            return
-        }
+        const resposta = await RequestHelper.executar(
+            () => this.feedbackService.listarPorGestorEColaborador(gestorId, colaboradorId)
+        )
 
-        if(!resposta) {
-            Toast.getToast().show('Erro ao listar feedbacks.', 'erro')
-            return
+        Notificador.resposta(resposta, 'listar')
+        if (resposta) {
+            this.feedbackView.listarFeedbacks(resposta, this.gerenciarForm.bind(this))
         }
-        
-        this.feedbackView.listarFeedbacks(resposta, this.gerenciarForm.bind(this), variante)
     }
 
     async criar(feedback) {
@@ -56,24 +49,26 @@ export class FeedbackController {
         const { colaboradorId, gestorId, monitorId } = Url.consultarParametros()
 
         const resposta = await this.feedbackService.criar({
-            ...feedback, 
+            ...feedback,
             colaboradorId,
             gestorId: gestorId ?? monitorId
         })
 
         Loader.getLoader().hide()
 
-        if(resposta?.erro) {
+        if (resposta?.erro) {
             Toast.getToast().show(resposta.erro, 'erro')
             return
         }
 
-        if(!resposta) {
+        if (!resposta) {
             Toast.getToast().show('Erro ao criar feedback.', 'erro')
-            return 
-        } 
-        
+            return
+        }
+
         Toast.getToast().show('Feedback criado com sucesso!', 'sucesso')
+
+        Notificador
         this.feedbackView.atualizarListaFeedbacks(resposta, this.gerenciarForm.bind(this))
         this.gerenciarForm('detalhes')
     }
@@ -82,30 +77,30 @@ export class FeedbackController {
         Loader.getLoader().show()
         const { id } = this.feedbackRecuperado
 
-        const resposta = 
+        const resposta =
             await this.feedbackService.atualizar(
-                id, 
+                id,
                 this.feedbackRecuperado,
                 feedbackAtualizado
             )
 
         Loader.getLoader().hide()
 
-        if(resposta?.erro) {
+        if (resposta?.erro) {
             Toast.getToast().show(resposta.erro, 'erro')
             return
         }
-        
-        if(!resposta) {
+
+        if (!resposta) {
             Toast.getToast().show('Erro ao atualizar feedback.', 'erro')
-            return 
+            return
         }
 
         Toast.getToast().show('Feedback atualizado com sucesso!', 'sucesso')
 
         Url.adicionarParametroURL('modo', 'criar')
         Url.removerParametroURL('feedbackId')
-        
+
         this.listarFeedbacks('detalhes')
         this.gerenciarForm('detalhes')
     }
@@ -114,11 +109,10 @@ export class FeedbackController {
         Loader.getLoader().show()
         const { feedbackId } = Url.consultarParametros()
 
-        this.feedbackRecuperado = null
         this.feedbackRecuperado = await this.feedbackService.recuperarPorId(feedbackId)
         Loader.getLoader().hide()
 
-        if(this.feedbackRecuperado?.erro) {
+        if (this.feedbackRecuperado?.erro) {
             Toast.getToast().show(this.feedbackRecuperado.erro, 'erro')
             return
         }
@@ -129,5 +123,5 @@ export class FeedbackController {
         }
 
         this.feedbackView.getForm().definirValoresIniciais(this.feedbackRecuperado)
-    }  
+    }
 }
