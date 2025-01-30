@@ -14,5 +14,9 @@ export const MENSAGENS_FEEDBACK = {
     deletar: {
         erro: 'Erro ao deletar feedback.',
         sucesso: 'Feedback deletado com sucesso!',
-    }
+    },
+    recuperar: {
+        erro: 'Erro ao recuperar feedback.',
+        sucesso: 'Feedback recuperado com sucesso!',
+    },
 }
