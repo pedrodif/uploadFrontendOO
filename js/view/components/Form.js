@@ -9,7 +9,6 @@ export class Form {
         this.form.reset()
     }
 
-
     lerDadosForm() {
         const dadosRecuperados = Object.fromEntries(new FormData(this.form).entries())
 
