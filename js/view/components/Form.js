@@ -9,14 +9,26 @@ export class Form {
         this.form.reset()
     }
 
+
+    lerDadosForm() {
+        const dadosRecuperados = Object.fromEntries(new FormData(this.form).entries())
+
+        for(let key in dadosRecuperados) {
+            if (dadosRecuperados.hasOwnProperty(key)) {
+                dadosRecuperados[key] = dadosRecuperados[key].trim()
+            }
+        }
+
+        return dadosRecuperados
+    }
+
     submit(callback) {     
         this.form.removeEventListener('submit', this.handleSubmit)
 
         this.handleSubmit = async (evento) => {
             evento.preventDefault()
-            const dadosRecuperados = Utils.lerDadosForm(evento.target)
             
-            if(this.validarForm(dadosRecuperados)) {
+            if(this.validarForm(this.lerDadosForm()) {
                 await callback(dadosRecuperados)
                 this.limparForm()
             }  
