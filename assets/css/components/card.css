@@ -11,7 +11,7 @@
     box-shadow: var(--box_shadow);
 }
 
-.feedback-card> header {
+.feedback-card > header {
     height: 60px;
     padding:  16px;
     display: flex;
