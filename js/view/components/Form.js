@@ -26,8 +26,9 @@ export class Form {
 
         this.handleSubmit = async (evento) => {
             evento.preventDefault()
+            const dadosRecuperados = this.lerDadosForm()
             
-            if(this.validarForm(this.lerDadosForm()) {
+            if(this.validarForm(dadosRecuperados)) {
                 await callback(dadosRecuperados)
                 this.limparForm()
             }  
