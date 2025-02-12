@@ -47,18 +47,6 @@ export class Utils {
         seletor.style.height = seletor.scrollHeight + 'px'
     }
 
-    static lerDadosForm(form) {
-        const dadosRecuperados = Object.fromEntries(new FormData(form).entries())
-
-        for(let key in dadosRecuperados) {
-            if (dadosRecuperados.hasOwnProperty(key)) {
-                dadosRecuperados[key] = dadosRecuperados[key].trim()
-            }
-        }
-
-        return dadosRecuperados
-    }
-
     static gerenciarVisibilidade(campos, display = 'none') {
         campos.forEach(campo => campo.style.display = display)
     }
