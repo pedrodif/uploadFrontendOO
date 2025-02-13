@@ -159,12 +159,18 @@ footer {
 body::-webkit-scrollbar, .off-canvas::-webkit-scrollbar {
     width: 12px;
 }
+
+textarea::-webkit-scrollbar, .off-canvas::-webkit-scrollbar {
+    width: 8px;
+}
   
-body::-webkit-scrollbar-track, .off-canvas::-webkit-scrollbar-track  {
+body::-webkit-scrollbar-track, .off-canvas::-webkit-scrollbar-track, 
+textarea::-webkit-scrollbar-track, .off-canvas::-webkit-scrollbar-track  {
     background: var(--off);
 }
   
-body::-webkit-scrollbar-thumb, .off-canvas::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb, .off-canvas::-webkit-scrollbar-thumb, 
+textarea::-webkit-scrollbar-thumb, .off-canvas::-webkit-scrollbar-thumb {
     background-color: var(--green_dark);
     border-radius: 20px;
     border: 2px solid var(--off);
