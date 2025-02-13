@@ -21,7 +21,7 @@ export class Form {
         return dadosRecuperados
     }
 
-    submit(callback) {     
+    onSubmit(callback) {     
         this.form.removeEventListener('submit', this.handleSubmit)
 
         this.handleSubmit = async (evento) => {

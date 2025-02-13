@@ -4,5 +4,4 @@ const feedbackController = new FeedbackDetalhesController()
 
 document.addEventListener('DOMContentLoaded', () => {
     feedbackController.listarFeedbacks()
-    feedbackController.gerenciarForm()
 })
