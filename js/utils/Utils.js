@@ -39,7 +39,7 @@ export class Utils {
     static posicionarCursorVarianteTexto(seletor) {
         seletor.selectionStart = seletor.value.length
         seletor.selectionEnd = seletor.value.length
-        posicionarFocus(seletor)
+        Utils.posicionarFocus(seletor)
     }
 
     static redimensionarAltura(seletor) {

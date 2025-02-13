@@ -6,7 +6,6 @@ export class FeedbackForm extends Form {
     constructor(form) {
         super(form)
         this.btnSubmit = Utils.consultarSeletor('button[type=submit]')
-        this.textArea = Utils.consultarSeletor('textarea')
         this.redimensionarCampos()
     }
 
@@ -26,6 +25,7 @@ export class FeedbackForm extends Form {
     
     fluxoEdicao() {
         this.desabilitarCampos(false)
+        Utils.posicionarCursorVarianteTexto(this.form.querySelector('input[name=titulo]'))
         this.btnSubmit.textContent = 'Salvar Alterações'
     }
 
@@ -90,7 +90,7 @@ export class FeedbackForm extends Form {
     }
 
     redimensionarCampos() {
-        this.textArea.addEventListener('input', (evento) => {
+        this.form.querySelector('textArea').addEventListener('input', (evento) => {
             Utils.redimensionarAltura(evento.target)
         })
     }
