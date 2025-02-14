@@ -5,11 +5,31 @@ export class Form {
         this.form = form
     }
 
-    limparForm() {
+    #limparForm() {
         this.form.reset()
     }
 
-    lerDadosForm() {
+    #montarMensagemErro() {
+        const p = Utils.criarElementoComTexto('p', 'Este campo é obrigatório *')
+        p.classList.add('mensagem-erro-campo-obrigatorio')
+        return p
+    }
+
+    gerenciarCampoObrigatorio(seletor, valor) {
+        if (!valor) {
+            if(seletor.classList.contains('input-erro-campo-obrigatorio')) {
+                return 
+            }
+             
+            seletor.classList.add('input-erro-campo-obrigatorio')
+            seletor.insertAdjacentElement('afterend', this.#montarMensagemErro())
+        } else if(seletor.nextElementSibling.tagName === 'P') {
+            seletor.classList.remove('input-erro-campo-obrigatorio')
+            seletor.nextElementSibling.remove()
+        }   
+    }
+
+    #lerDadosForm() {
         const dadosRecuperados = Object.fromEntries(new FormData(this.form).entries())
 
         for(let key in dadosRecuperados) {
@@ -26,36 +46,15 @@ export class Form {
 
         this.handleSubmit = async (evento) => {
             evento.preventDefault()
-            const dadosRecuperados = this.lerDadosForm()
+            const dadosRecuperados = this.#lerDadosForm()
             
             if(this.validarForm(dadosRecuperados)) {
                 await callback(dadosRecuperados)
-                this.limparForm()
+                this.#limparForm()
             }  
         }
 
         this.form.addEventListener('submit', this.handleSubmit)
-    }
-
-    montarMensagemErro() {
-        const p = Utils.criarElemento('p')
-        p.textContent = 'Este campo é obrigatório *'
-        p.classList.add('mensagem-erro-campo-obrigatorio')
-        return p
-    }
-
-    gerenciarCampoObrigatorio(seletor, valor) {
-        if (!valor) {
-            if(seletor.classList.contains('input-erro-campo-obrigatorio')) {
-                return 
-            }
-             
-            seletor.classList.add('input-erro-campo-obrigatorio')
-            seletor.insertAdjacentElement('afterend', this.montarMensagemErro())
-        } else if(seletor.nextElementSibling.tagName === 'P') {
-            seletor.classList.remove('input-erro-campo-obrigatorio')
-            seletor.nextElementSibling.remove()
-        }   
     }
 
     definirValoresIniciais(valoresIniciais) {

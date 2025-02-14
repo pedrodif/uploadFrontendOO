@@ -9,10 +9,6 @@ export class FeedbackController {
         this.feedbackRecuperado = null
     }
 
-    getFeedbackView() {
-        return this.feedbackView
-    }
-
     async listarFeedbacks() {
         const { colaboradorId, gestorId } = Url.consultarParametros()
 

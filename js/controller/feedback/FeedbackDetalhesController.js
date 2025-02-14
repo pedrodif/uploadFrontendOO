@@ -7,44 +7,42 @@ import { FeedbackDetalhesView } from '../../view/feedback/FeedbackDetalhesView.j
 export class FeedbackDetalhesController extends FeedbackController {
     constructor() {
         super(new FeedbackService(), new FeedbackDetalhesView())
-        this.iniciarForm()
+        this.#iniciarForm()
     }
 
-    iniciarForm() {
-        this.getFeedbackView().getForm().onSubmit(this.lidarComSubmit.bind(this))
-        this.configurarForm()
+    #iniciarForm() {
+        this.feedbackView.form.onSubmit(this.#lidarComSubmit.bind(this))
+        this.#configurarForm()
     }
 
-    configurarForm(modo = 'criar') {
-        requestAnimationFrame(() => {
-            this.getFeedbackView().getForm().configurar(modo)
-        })
+    #configurarForm(modo = 'criar') {
+        requestAnimationFrame(() => this.feedbackView.form.configurar(modo))
     }
 
     async listarFeedbacks() {
         const resposta = await super.listarFeedbacks()
         if (resposta) {
-            this.getFeedbackView().listarFeedbacks(resposta, this.recuperarFeedbackPorId.bind(this))
+            this.feedbackView.listarFeedbacks(resposta, this.#recuperarFeedbackPorId.bind(this))
         }
     }
 
-    async recuperarFeedbackPorId() {
+    async #recuperarFeedbackPorId() {
         const resposta = await super.recuperarFeedbackPorId()
         if (resposta) {
-            this.configurarForm('detalhes')
-            this.getFeedbackView().getForm().definirValoresIniciais(resposta)
+            this.#configurarForm('detalhes')
+            requestAnimationFrame(() => this.feedbackView.form.definirValoresIniciais(resposta))
         }
     }
 
-    async lidarComSubmit(feedback) {
+    async #lidarComSubmit(feedback) {
         const { modo } = Url.consultarParametros()
         const resposta =
             modo === 'detalhes' ? await super.atualizar(feedback) : await super.criar(feedback)
 
-        this.finalizarFluxoSubmit(resposta, modo)
+        this.#finalizarFluxoSubmit(resposta, modo)
     }
 
-    finalizarFluxoSubmit(resposta = {}, modo) {
+    #finalizarFluxoSubmit(resposta, modo) {
         if (modo === 'detalhes') {
             Url.removerParametroURL('feedbackId')
             Url.adicionarParametroURL('modo', 'criar')
@@ -52,9 +50,9 @@ export class FeedbackDetalhesController extends FeedbackController {
         }
 
         if (modo === 'criar' && Object.keys(resposta).length > 0) {
-            this.getFeedbackView().atualizarListaFeedbacks(resposta, this.recuperarFeedbackPorId.bind(this))
+            this.feedbackView.atualizarListaFeedbacks(resposta, this.#recuperarFeedbackPorId.bind(this))
         }
 
-        this.configurarForm()
+        this.#configurarForm()
     }
 }

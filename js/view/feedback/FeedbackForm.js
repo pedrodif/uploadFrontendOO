@@ -5,79 +5,89 @@ import { Inputs } from "../components/Inputs.js"
 export class FeedbackForm extends Form {
     constructor(form) {
         super(form)
-        this.btnSubmit = Utils.consultarSeletor('button[type=submit]')
-        this.redimensionarCampos()
+        this.btnSubmit = this.form.querySelector('button[type=submit]')
+        this.#redimensionarCampos()
     }
 
-    configurar(variante) {
-        this.configurarBotao(variante)
-
-        switch (variante) {
-            case 'detalhes':
-                this.montarCampos()
-                break
-            default:
-                this.desmontarCampos()
-                this.definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
-                break
-        }
+    #atualizarTextoBotao(texto) {
+        this.btnSubmit.textContent = texto
     }
-    
-    fluxoEdicao() {
-        this.desabilitarCampos(false)
+
+    #fluxoEdicao() {
+        this.#desabilitarCampos(false)
         Utils.posicionarCursorVarianteTexto(this.form.querySelector('input[name=titulo]'))
-        this.btnSubmit.textContent = 'Salvar Alterações'
+        this.#atualizarTextoBotao('Salvar Alterações')
     }
 
-    fluxoSalvarEdicao() {
+    #fluxoSalvarEdicao() {
         const eventoSubmit = new Event('submit', { bubbles: true, cancelable: true })
         this.form.dispatchEvent(eventoSubmit)
     }
 
-    fluxoDetalhes() {
-        this.desabilitarCampos(true)
-        this.btnSubmit.textContent = 'Editar'
+    #fluxoDetalhes() {
+        this.#desabilitarCampos(true)
+        this.#atualizarTextoBotao('Editar')
 
         if (!this.btnSubmit.hasAttribute('evento-configurado')) {
-            this.btnSubmit.addEventListener('click', this.eventoClick.bind(this))
+            this.btnSubmit.addEventListener('click', this.#eventoClick.bind(this))
             this.btnSubmit.setAttribute('evento-configurado', 'true')
         }
     }
 
-    eventoClick(evento) {
+    #eventoClick(evento) {
         evento.preventDefault()
 
         if (this.btnSubmit.textContent === 'Editar') {
-            this.fluxoEdicao()
+            this.#fluxoEdicao()
         } else {
-            this.fluxoSalvarEdicao()
+            this.#fluxoSalvarEdicao()
         }
     }
 
-    configurarBotao(variante) {        
+    #configurarBotao(variante) {
         if (variante === 'detalhes') {
-            this.fluxoDetalhes()
+            this.#fluxoDetalhes()
         } else {
-            this.btnSubmit.textContent = 'Criar'
+            this.#atualizarTextoBotao('Criar')
         }
     }
 
-    desabilitarCampos(variante) {
+    #desabilitarCampos(variante) {
         const campos = this.form.querySelectorAll('input, select, textarea')
         campos.forEach(campo => {
-            if (campo.name !== 'dataEdicao' && campo.name !== 'dataCriacao') {
+            if (!['dataEdicao', 'dataCriacao'].includes(campo.name)) {
                 campo.disabled = variante
             }
         })
     }
 
-    desmontarCampos() {
+    #desmontarCampos() {
         this.form.querySelector('#edicao-container')?.remove()
     }
 
-    montarCampos() {
+    #montarCampos() {
         if (!this.form.querySelector('#edicao-container')) {
             this.form.querySelector('#criacao-container').insertAdjacentElement('afterend', Inputs.montarInputEdicao())
+        }
+    }
+
+    #redimensionarCampos() {
+        this.form.querySelector('textArea').addEventListener('input', (evento) => {
+            Utils.redimensionarAltura(evento.target)
+        })
+    }
+
+    configurar(variante) {
+        this.#configurarBotao(variante)
+
+        switch (variante) {
+            case 'detalhes':
+                this.#montarCampos()
+                break
+            default:
+                this.#desmontarCampos()
+                this.definirValoresIniciais({ dataCriacao: Utils.gerenciarData() })
+                break
         }
     }
 
@@ -89,18 +99,12 @@ export class FeedbackForm extends Form {
         )
     }
 
-    redimensionarCampos() {
-        this.form.querySelector('textArea').addEventListener('input', (evento) => {
-            Utils.redimensionarAltura(evento.target)
-        })
-    }
-
     validarForm(dados) {
         let validado = true
         const camposObrigatorios = ['titulo', 'descricao']
 
         camposObrigatorios.forEach(campo => {
-            this.gerenciarCampoObrigatorio(Utils.consultarSeletor(`[name=${campo}]`), dados[campo])
+            this.gerenciarCampoObrigatorio(this.form.querySelector(`[name=${campo}]`), dados[campo])
 
             if (!dados[campo]) {
                 validado = false

@@ -8,10 +8,6 @@ export class FeedbackDetalhesView {
         this.form = new FeedbackForm(Utils.consultarSeletor('#feedback-form'))
     }
 
-    getForm() {
-        return this.form
-    }
-
     atualizarListaFeedbacks(feedback, callback) {
         this.feedbackContainer.prepend(new FeedbackCard(feedback).montarFeedback(callback))
     }

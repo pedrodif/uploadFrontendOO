@@ -11,6 +11,12 @@ export class Utils {
         return document.createElement(variante)
     }
 
+    static criarElementoComTexto(variante, texto) {
+        const elemento = Utils.criarElemento(variante)
+        elemento.textContent = texto
+        return elemento
+    }
+
     static gerenciarData() {
         const dataAtual = new Date()
         dataAtual.setMinutes(dataAtual.getMinutes() - dataAtual.getTimezoneOffset())

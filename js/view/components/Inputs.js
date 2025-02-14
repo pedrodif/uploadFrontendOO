@@ -5,9 +5,8 @@ export class Inputs {
         const i = Utils.criarElemento('i')
         i.classList.add('fa-solid', 'fa-pen-to-square')
 
-        const label = Utils.criarElemento('label')
+        const label = Utils.criarElementoComTexto('label', 'Editado em: ')
         label.setAttribute('for', 'dataEdicao')
-        label.textContent = 'Editado em: '
 
         const input = Utils.criarElemento('input')
         input.type = 'date'
