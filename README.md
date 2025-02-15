@@ -120,7 +120,7 @@ Para configurar e executar os testes com Jest, siga os passos abaixo:
    ```
 ### Observações
 
-- **Node.js**: Certifique-se de ter o Node.js instalado no seu sistema. Você pode verificar a instalação executando:
+- **Node.js**: Certifique-se de ter o Node.js instalado. Você pode verificar a instalação executando:
 
   ```bash
   node -v
