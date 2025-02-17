@@ -24,7 +24,7 @@ A pasta js contém toda a lógica de programação e está organizada em subpast
 - **view**: Responsável por renderizar a interface para o usuário.  
 - **utils**: Utilitários.  
 
-## 4. **Tests**
+## 4. **Tests com Jest**
 
 A pasta **tests** contém os arquivos de teste, organizados de maneira similar à estrutura da pasta **JS**, para garantir que cada parte da aplicação seja adequadamente testada. Cada subpasta em **tests** corresponde a uma subpasta na pasta **JS** e contém os testes das classes ou componentes presentes nas respectivas pastas.  
 
@@ -37,7 +37,7 @@ A estrutura da pasta **tests** inclui:
 - **view**: Testes para a renderização da interface do usuário.  
 - **utils**: Testes para funções utilitárias.
 
-### Executando os Testes com Jest
+### Executando os Testes
 
 Para configurar e executar os testes com Jest, siga os passos abaixo:
 
