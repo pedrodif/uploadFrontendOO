@@ -29,7 +29,7 @@ export class Form {
         }   
     }
 
-    #lerDadosForm() {
+    lerDadosForm() {
         const dadosRecuperados = Object.fromEntries(new FormData(this.form).entries())
 
         for(let key in dadosRecuperados) {
@@ -46,13 +46,13 @@ export class Form {
 
         this.handleSubmit = async (evento) => {
             evento.preventDefault()
-            const dadosRecuperados = this.#lerDadosForm()
+            const dadosRecuperados = this.lerDadosForm()
             
             if(this.validarForm(dadosRecuperados)) {
                 await callback(dadosRecuperados)
                 this.#limparForm()
             }  
-        }
+        }   
 
         this.form.addEventListener('submit', this.handleSubmit)
     }
