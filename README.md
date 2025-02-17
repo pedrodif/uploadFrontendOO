@@ -24,7 +24,7 @@ A pasta js contém toda a lógica de programação e está organizada em subpast
 - **view**: Responsável por renderizar a interface para o usuário.  
 - **utils**: Utilitários.  
 
-## 4. **Tests**
+## 4. **Tests com Jest**
 
 A pasta **tests** contém os arquivos de teste, organizados de maneira similar à estrutura da pasta **JS**, para garantir que cada parte da aplicação seja adequadamente testada. Cada subpasta em **tests** corresponde a uma subpasta na pasta **JS** e contém os testes das classes ou componentes presentes nas respectivas pastas.  
 
@@ -37,7 +37,7 @@ A estrutura da pasta **tests** inclui:
 - **view**: Testes para a renderização da interface do usuário.  
 - **utils**: Testes para funções utilitárias.
 
-### Executando os Testes com Jest
+### Executando os Testes
 
 Para configurar e executar os testes com Jest, siga os passos abaixo:
 
@@ -55,48 +55,8 @@ Para configurar e executar os testes com Jest, siga os passos abaixo:
    ```bash
    npm install --save-dev jest
    ```
- 3. **Editar o `package.json`:**
 
-   No arquivo `package.json`, adicione ou edite as seguintes informações, exemplo:
-
-   ```json
-   {
-     "name": "uploadfrontendoo",
-     "version": "1.0.0",
-     "description": "Este projeto foi desenvolvido utilizando uma arquitetura modular que segue os princípios de separação de responsabilidades.",
-     "main": "index.js",
-     "scripts": {
-       "test": "jest"
-     },
-     "keywords": [],
-     "author": "",
-     "license": "ISC",
-     "devDependencies": {
-       "jest": "^29.7.0",
-       "babel-jest": "^29.0.0",
-       "@babel/preset-env": "^7.0.0"
-     },
-     "jest": {
-       "transform": {
-         "^.+\\.js$": "babel-jest"
-       },
-       "testEnvironment": "node"
-     },
-     "babel": {
-       "presets": [
-         [
-           "@babel/preset-env",
-           {
-             "targets": {
-               "node": "current"
-             }
-           }
-         ]
-       ]
-     }
-   }
-  ```
-4. **Instalar as dependências do Babel:**
+3. **Instalar as dependências do Babel:**
 
    Instale o Babel para que o Jest possa transpilar o código JavaScript:
 
@@ -104,14 +64,66 @@ Para configurar e executar os testes com Jest, siga os passos abaixo:
    npm install --save-dev jest babel-jest @babel/preset-env
    ```
 
-5. **Instalar as dependências do projeto:**
+4. **Instalar o jest JSDOM**
+   
+   Isso permite que os testes sejam executados em um ambiente que simula o comportamento de um navegador, incluindo o document, o window e outros elementos do DOM.
+
+   ```bash
+   npm install --save-dev jest-environment-jsdom
+   ```
+
+ 5. **Editar o `package.json`:**
+
+   No arquivo `package.json`, adicione ou edite as seguintes informações, exemplo:
+
+   ```json
+   {
+  "name": "uploadfrontendoo",
+  "version": "1.0.0",
+  "description": "Este projeto foi desenvolvido utilizando uma arquitetura modular que segue os princípios de separação de responsabilidades.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "testEnvironment": "jsdom"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "type": "module"
+}
+  ```
+
+6. **Instalar as dependências do projeto:**
 
    Atualize todas as dependências necessárias, incluindo o Jest e o Babel:
 
    ```bash
    npm install
    ```
-6. **Rodar os testes com `npm test`:**
+7. **Rodar os testes com `npm test`:**
 
    Após a configuração, execute os testes com o seguinte comando:
 
