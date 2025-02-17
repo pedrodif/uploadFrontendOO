@@ -106,7 +106,7 @@ Para configurar e executar os testes com Jest, siga os passos abaixo:
 
 5. **Instalar as dependências do projeto:**
 
-   Instale todas as dependências necessárias, incluindo o Jest e o Babel:
+   Atualize todas as dependências necessárias, incluindo o Jest e o Babel:
 
    ```bash
    npm install
@@ -120,7 +120,7 @@ Para configurar e executar os testes com Jest, siga os passos abaixo:
    ```
 ### Observações
 
-- **Node.js**: Certifique-se de ter o Node.js instalado no seu sistema. Você pode verificar a instalação executando:
+- **Node.js**: Certifique-se de ter o Node.js instalado. Você pode verificar a instalação executando:
 
   ```bash
   node -v
