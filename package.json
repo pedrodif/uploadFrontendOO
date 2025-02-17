@@ -12,13 +12,14 @@
   "devDependencies": {
     "@babel/preset-env": "^7.26.9",
     "babel-jest": "^29.7.0",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
   },
   "jest": {
     "transform": {
       "^.+\\.js$": "babel-jest"
     },
-    "testEnvironment": "node"
+    "testEnvironment": "jsdom"
   },
   "babel": {
     "presets": [
