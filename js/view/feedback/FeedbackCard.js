@@ -18,7 +18,7 @@ export class FeedbackCard {
          `${this.feedback.titulo.slice(0, 16)}...`
         )
         h4.dataset.toggle = 'tooltip'
-        h4.dataset.title = this.feedback.titulo
+        h4.title = this.feedback.titulo
 
         const p = Utils.criarElementoComTexto('p', 
             `${this.feedback.descricao.slice(0, 100)}...`

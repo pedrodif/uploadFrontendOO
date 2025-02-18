@@ -45,6 +45,9 @@ export class Breadcrumb {
     
             if (index === 0 && item.label.toLowerCase() === "home") {
                 breadcrumbItem.innerHTML = `<i class="fas fa-home"></i>`
+                breadcrumbItem.dataset.toggle = 'tooltip'
+                breadcrumbItem.title = 'Home'
+                
             } else {
                 breadcrumbItem.textContent = item.label
             }
