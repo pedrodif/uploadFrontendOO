@@ -23,8 +23,8 @@ describe('Form', () => {
         formElement.appendChild(inputNome)
         formElement.appendChild(inputEmail)
         formElement.appendChild(button)
-        document.body.appendChild(formElement)
 
+        document.body.appendChild(formElement)
         form = new Form(Utils.consultarSeletor('#form'))
     })
 

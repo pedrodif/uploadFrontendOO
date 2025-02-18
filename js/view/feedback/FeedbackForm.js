@@ -14,7 +14,7 @@ export class FeedbackForm extends Form {
     }
 
     #fluxoEdicao() {
-        this.#desabilitarCampos(false)
+        this.desabilitarCampos(false)
         Utils.posicionarCursorVarianteTexto(this.form.querySelector('input[name=titulo]'))
         this.#atualizarTextoBotao('Salvar Alterações')
     }
@@ -25,7 +25,7 @@ export class FeedbackForm extends Form {
     }
 
     #fluxoDetalhes() {
-        this.#desabilitarCampos(true)
+        this.desabilitarCampos(true)
         this.#atualizarTextoBotao('Editar')
 
         if (!this.btnSubmit.hasAttribute('evento-configurado')) {
@@ -52,7 +52,7 @@ export class FeedbackForm extends Form {
         }
     }
 
-    #desabilitarCampos(variante) {
+    desabilitarCampos(variante) {
         const campos = this.form.querySelectorAll('input, select, textarea')
         campos.forEach(campo => {
             if (!['dataEdicao', 'dataCriacao'].includes(campo.name)) {
@@ -72,7 +72,7 @@ export class FeedbackForm extends Form {
     }
 
     #redimensionarCampos() {
-        this.form.querySelector('textArea').addEventListener('input', (evento) => {
+        this.form.querySelector('textarea').addEventListener('input', (evento) => {
             Utils.redimensionarAltura(evento.target)
         })
     }
