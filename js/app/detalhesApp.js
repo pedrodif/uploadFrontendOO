@@ -5,9 +5,9 @@ const feedbackController = new FeedbackDetalhesController()
 
 document.addEventListener('DOMContentLoaded', () => {
     Breadcrumb.getBreadcrumb().add([
-        { label: 'Home', link: '/index.html' },
-        { label: 'Feedbacks', link: '/feedbacks.html' },
-        { label: 'Detalhes', link: '#' }
+        { label: 'home', link: '/index.html' },
+        { label: 'Teste', link: '/feedbacks.html' },
+        { label: 'Teste', link: '#' }
     ])
 
 
