@@ -1,7 +1,7 @@
 import { Utils } from '../../utils/Utils.js'
 export class Breadcrumb {
     static #INSTANCIA = null
-    #container
+    #lista
     #trilha = []
 
     constructor() {
@@ -9,15 +9,15 @@ export class Breadcrumb {
             throw new Error('Use Breadcrumb.getBreadcrumb() para acessar a instância.')
         }
 
-        this.#container = this.#montarContainer()
+        this.#lista = this.#montarLista()
     }
-   
-    #montarContainer() {
-        const container = Utils.criarElemento('nav')
-        container.className = 'breadcrumb-container'
 
+    #montarLista() {
         const ul = Utils.criarElemento('ul')
         ul.className = 'breadcrumb-lista'
+
+        const container = Utils.criarElemento('nav')
+        container.className = 'breadcrumb-container'
         container.appendChild(ul)
 
         const main = Utils.consultarSeletor('main')
@@ -29,40 +29,50 @@ export class Breadcrumb {
     #montarSeparador() {
         const separador = Utils.criarElementoComTexto('span', ' / ')
         separador.classList.add('breadcrumb-separador')
-        this.#container.appendChild(separador)
+
+        return separador
     }
 
-    #montarHomeIcone() {
+    #montarAncoraHome(item) {
         const icone = Utils.criarElemento('i')
         icone.classList.add('fas', 'fa-home')
 
-        return icone
+        const ancora = Utils.criarElemento('a')
+        ancora.href = item.link
+        ancora.dataset.toggle = 'tooltip'
+        ancora.title = 'Home'
+        ancora.classList.add('breadcrumb-link')
+        ancora.appendChild(icone)
+
+        return ancora
     }
 
-    #montarBreadCrumbItem(ancora) {
+    #montarAncoraPadrao(item) {
+        const ancora = Utils.criarElementoComTexto('a', item.label)
+        ancora.href = item.link
+        ancora.classList.add('breadcrumb-link')
+
+        return ancora
+    }
+
+    #montarBreadCrumbItem(variante) {
         const breadcrumbItem = Utils.criarElemento('li')
         breadcrumbItem.classList.add('breadcrumb-item')
-        breadcrumbItem.appendChild(ancora)
-        this.#container.appendChild(breadcrumbItem)
+        breadcrumbItem.appendChild(variante)
+
+        this.#lista.appendChild(breadcrumbItem)
     }
 
     #renderizar() {
-        this.#container.innerHTML = ''
+        this.#lista.innerHTML = ''
+
         this.#trilha.forEach((item, index) => {
-            const ancora = Utils.criarElementoComTexto('a', item.label === 'home' ? '' : item.label)
-            ancora.href = item.link
-            ancora.classList.add('breadcrumb-link')
-
-            if (index === 0) {
-                ancora.appendChild(this.#montarHomeIcone())
-                ancora.dataset.toggle = 'tooltip'
-                ancora.title = 'Home'
-            }
-
+            const ancora =  index === 0 ? this.#montarAncoraHome(item) : this.#montarAncoraPadrao(item)
             this.#montarBreadCrumbItem(ancora)
-            
+
             if (index < this.#trilha.length - 1) {
-                this.#montarSeparador()
+                const separador = this.#montarSeparador()
+                this.#montarBreadCrumbItem(separador)
             }
         })
     }
