@@ -112,6 +112,7 @@ button {
     color: var(--green_light);
     background-color: var(--accent);
     border-radius: var(--radius);
+    transition: background-color 0.3s ease-in-out;
 }
 
 button:hover {

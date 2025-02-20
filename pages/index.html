@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,25 +11,20 @@
     <link rel="stylesheet" href="../assets/css/components/toast.css">
     <link rel="stylesheet" href="../assets/css/components/loader.css">
     <link rel="stylesheet" href="../assets/css/components/breadcrumb.css">
+    <link rel="stylesheet" href="../assets/css/components/file-uploader.css">
     <title>Detalhes</title>
 </head>
+
 <body>
     <header>
         <img src="../assets/img/feedback-fusion-logo.svg" alt="logo" class="logo">
         <nav>
-            <button>
-                <i class="fa-solid fa-chevron-down"></i>
-            </button>
-
+            <button><i class="fa-solid fa-chevron-down"></i></button>
             <ul class="dropdown">
-                <li>
-                    <a href="#novo-feedback">Novo Feedback</a>
-                </li>
-                <li>
-                    <a href="#feedbacks-eviados">Feedbacks Enviados</a>
-                </li>
+                <li><a href="#novo-feedback">Novo Feedback</a></li>
+                <li><a href="#feedbacks-eviados">Feedbacks Enviados</a></li>
             </ul>
-          </nav>
+        </nav>
     </header>
 
     <main>
@@ -43,7 +39,7 @@
                         <input type="date" id="dataCriacao" name="dataCriacao" disabled />
                     </fieldset>
                 </fieldset>
-                
+
                 <input type="text" name="titulo" placeholder="Título">
                 <textarea name="descricao" placeholder="Descrição"></textarea>
 
@@ -52,6 +48,8 @@
                 </fieldset>
             </form>
         </section>
+
+        <div id="file-uploader"></div>
 
         <section id="feedbacks-eviados">
             <h1>Feedbacks Enviados</h1>
@@ -66,4 +64,5 @@
     <script type="module" src="../js/app/detalhesApp.js"></script>
     <script src="https://kit.fontawesome.com/9e7334b542.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

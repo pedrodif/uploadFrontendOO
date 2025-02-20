@@ -1,11 +1,13 @@
 import { Utils } from '../../utils/Utils.js'
 import { FeedbackCard } from './FeedbackCard.js'
 import { FeedbackForm } from './FeedbackForm.js'
+import { FileUploader } from '../components/FileUploader.js'
 
 export class FeedbackDetalhesView {
     constructor() {
         this.feedbackContainer = Utils.consultarSeletor('#feedback-container')
         this.form = new FeedbackForm(Utils.consultarSeletor('#feedback-form'))
+        this.fileUploader = new FileUploader(Utils.consultarSeletor('#file-uploader'))
     }
 
     atualizarListaFeedbacks(feedback, callback) {
