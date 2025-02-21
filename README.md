@@ -138,4 +138,61 @@ Para configurar e executar os testes com Jest, siga os passos abaixo:
   node -v
   ```
   
+- Passo a Passo: Utilizando o Debugger com Jest no VS Code
+Ao criar os testes, pode ser necessário usar o modo debugger para identificar problemas. Veja o passo a passo abaixo:
+
+- **Altere o `package.json`**
+Adicione ou modifique o script de depuração para Jest:
+
+```json
+"scripts": {
+  "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand"
+}
+```
+
+- **Abra o menu "Run and Debug"**
+- No VS Code, vá para a aba **"Run and Debug"** (ou pressione `Ctrl+Shift+D`).
+
+- **Crie um arquivo `launch.json`**
+Se ainda não existir, clique em **"Create a launch.json file"**.
+
+- **Escolha a opção "Node.js"**
+Ao ser solicitado, selecione **"Node.js"** como o ambiente de depuração.
+
+- **Configure o `launch.json`**
+Adicione ou edite seu `launch.json` com a seguinte configuração:
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug Jest Tests",
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+            "args": [
+                "--runInBand",
+                "--watchAll=false"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        }
+    ]
+}
+```
+
+- **Adicione Breakpoints**
+Marque os pontos de parada (breakpoints) no código onde deseja inspecionar a execução.
+
+- **Rode o seguinte comando no terminal**
+
+```sh
+npm run test:debug
+```
+
+- **Inicie a Depuração**
+Clique no botão **▶ Iniciar Depuração** para rodar os testes e pausar nos breakpoints.
+
+  
 
