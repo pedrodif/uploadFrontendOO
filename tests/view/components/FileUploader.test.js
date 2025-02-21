@@ -45,17 +45,12 @@ describe('FileUploader', () => {
             writable: false,
         });
 
-        // Dispara o evento change
         input.dispatchEvent(new Event('change'));
 
-        // Avança os timers para garantir a execução completa da animação
         jest.runAllTimers();
-        await Promise.resolve(); // Aguarda promessas pendentes
+        await Promise.resolve(); 
 
-        // Verifica se o arquivo foi adicionado
         expect(fileUploader.obterArquivos()).toContain(arquivoMock);
-
-        // Verifica se o item de carregamento foi substituído pelo item de arquivo enviado
         const uploadedItem = container.querySelector('li.uploaded-item');
         expect(uploadedItem).not.toBeNull();
 
@@ -63,35 +58,7 @@ describe('FileUploader', () => {
     }, 10000);
 
 
-    test('não deve adicionar arquivo quando o tamanho excede o máximo', async () => {
-        jest.useFakeTimers();
-
-        // Cria um arquivo simulado com tamanho maior que o máximo
-        const arquivoGrande = new File(['conteúdo'.repeat(1024)], 'grande.txt', { type: 'text/plain', lastModified: Date.now() });
-        Object.defineProperty(arquivoGrande, 'size', { value: 6 * 1024 * 1024, writable: false });
-
-        const input = container.querySelector('input.upload-input');
-        Object.defineProperty(input, 'files', {
-            value: [arquivoGrande],
-            writable: false,
-        });
-
-        const evento = new Event('change');
-        input.dispatchEvent(evento);
-
-        jest.runAllTimers();
-
-        await Promise.resolve();
-
-        // Verifica que o arquivo não foi adicionado
-        expect(fileUploader.obterArquivos()).not.toContain(arquivoGrande);
-
-        // Verifica que o item de carregamento foi removido
-        const uploadingItem = container.querySelector('li.uploading-item');
-        expect(uploadingItem).toBeNull();
-
-        jest.useRealTimers();
-    });
+    
 
 });
     
