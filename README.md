@@ -151,7 +151,7 @@ Adicione ou modifique o script de depuração para Jest:
 ```
 
 2 - **Abra o menu "Run and Debug"**
-No VS Code, vá para a aba **"Run and Debug"** (ou pressione `Ctrl+Shift+D`).
+- No VS Code, vá para a aba **"Run and Debug"** (ou pressione `Ctrl+Shift+D`).
 
 3 - **Crie um arquivo `launch.json`**
 Se ainda não existir, clique em **"Create a launch.json file"**.
