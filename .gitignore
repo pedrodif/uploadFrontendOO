@@ -10,3 +10,6 @@ yarn-error.log*
 
 # Ignorar configurações do Jest
 coverage/
+
+# Ignorar config IDE
+.vscode/

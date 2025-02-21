@@ -96,7 +96,7 @@ export class FileUploader {
         const nomeArquivo = Utils.criarElementoComTexto('span', arquivo.name)
 
         const iconeRemover = Utils.criarElemento('i')
-        iconeRemover.classList.add('fas', 'fa-trash')
+        iconeRemover.classList.add('fa-solid', 'fa-xmark')
         iconeRemover.dataset.toggle = 'tooltip'
         iconeRemover.title = 'Remover'
 
