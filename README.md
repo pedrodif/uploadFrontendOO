@@ -139,8 +139,7 @@ Para configurar e executar os testes com Jest, siga os passos abaixo:
   ```
   
 ###  Utilizando o Debugger com Jest no VS Code
-
-- Ao criar os testes, pode ser necessário usar o modo debugger para identificar problemas. Veja o passo a passo abaixo:
+Ao criar os testes, pode ser necessário usar o modo debugger para identificar problemas. Veja o passo a passo abaixo:
 
 1 - **Altere o `package.json`**
 Adicione ou modifique o script de depuração para Jest:
@@ -152,7 +151,7 @@ Adicione ou modifique o script de depuração para Jest:
 ```
 
 2 - **Abra o menu "Run and Debug"**
-- No VS Code, vá para a aba **"Run and Debug"** (ou pressione `Ctrl+Shift+D`).
+No VS Code, vá para a aba **"Run and Debug"** (ou pressione `Ctrl+Shift+D`).
 
 3 - **Crie um arquivo `launch.json`**
 Se ainda não existir, clique em **"Create a launch.json file"**.
