@@ -4,7 +4,7 @@ export class FileUploader {
     #container
     #listaArquivos
     #arquivos = []
-    #tamanhoMaximo = 5 * 1024 * 1024
+    #TAMANHO_MAXIMO = 5 * 1024 * 1024
 
     constructor(container) {
         this.#container = container
@@ -21,7 +21,7 @@ export class FileUploader {
         input.type = 'file'
         input.multiple = true
         input.classList.add('upload-input')
-        input.addEventListener('change', (evento) => this.#handleArquivoSelecionado(evento))
+        input.addEventListener('change', async (evento) => this.#handleArquivoSelecionado(evento))
 
         const botaoUpload = Utils.criarElementoComTexto('button', 'Selecionar arquivos')
         botaoUpload.classList.add('upload-botao')
@@ -39,23 +39,21 @@ export class FileUploader {
     async #handleArquivoSelecionado(evento) {
         const arquivos = Array.from(evento.target.files)
 
-        for (let arquivo of arquivos) {
+        for(let arquivo of arquivos) {
             const { item, progresso } = this.#criarBarraProgresso(arquivo)
             this.#listaArquivos.appendChild(item)
 
-            const sucesso = await this.#animarBarraDeProgresso(progresso, arquivo.size <= this.#tamanhoMaximo)
-
-            if (sucesso) {
-                this.#arquivos.push(arquivo)
-                item.replaceWith(this.#criarElementoArquivo(arquivo))
-            } else {
-                item.remove()
-            }
+            await this.#animarBarraDeProgresso(progresso, arquivo.size <= this.#TAMANHO_MAXIMO)
+                .then(() => {
+                    this.#arquivos.push(arquivo)
+                    item.replaceWith(this.#criarElementoArquivo(arquivo))
+                }
+            ).catch(() => item.remove())
         }
     }
 
-    async #animarBarraDeProgresso(progresso, tamanhoValido) {
-        return new Promise((resolve) => {
+    #animarBarraDeProgresso(progresso, tamanhoValido) {
+        return new Promise((resolve, reject) => {
             let progressoAtual = 0
             const intervalo = setInterval(() => {
                 progressoAtual += 10
@@ -63,7 +61,12 @@ export class FileUploader {
 
                 if (progressoAtual >= 100) {
                     clearInterval(intervalo)
-                    resolve(tamanhoValido)
+
+                    if (tamanhoValido) {
+                        resolve('Upload concluído')
+                    } else {
+                        reject(new Error('Tamanho de arquivo inválido'))
+                    }
                 }
             }, 200)
         })
