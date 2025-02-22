@@ -59,7 +59,7 @@ describe('FileUploader', () => {
         expect(uploadedItem).not.toBeNull()
     })
 
-    test('não deve adicionar arquivo quando o tamanho excede o máximo', async () => {
+    test('Não deve adicionar arquivo quando o tamanho excede o máximo', async () => {
         jest.useFakeTimers()
 
         const arquivoGrande = new File(['conteúdo'.repeat(1024)], 'grande.txt', { type: 'text/plain', lastModified: Date.now() })
