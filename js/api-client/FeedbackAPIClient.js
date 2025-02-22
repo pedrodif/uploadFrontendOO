@@ -14,110 +14,65 @@ export class FeedbackAPIClient {
         this.URL_BASE = 'http://localhost:8080/feedbacks'
     }
 
-    async getByGestorAndColaboradorId(gestorId, colaboradorId) {
+    getByGestorAndColaboradorId(gestorId, colaboradorId) {
         if (!gestorId || !colaboradorId) {
             throw new Error('Gestor ID e Colaborador ID são obrigatórios.')
         }
-        
-        try {
-            const resposta = await fetch(
-                    `${this.URL_BASE}/gestor/${gestorId}/colaborador/${colaboradorId}`, 
-                    this.HEADERS_DEFAULT
-                )
-            
-                return resposta.ok ? 
-                await resposta.json() : false
-        } catch (error) {
-            console.error(error)
-        }
+
+        return fetch(`${this.URL_BASE}/gestor/${gestorId}/colaborador/${colaboradorId}`, this.HEADERS_DEFAULT)
+            .then(resposta => resposta.ok ? resposta.json() : false)
+            .catch(error => console.error('getByGestorAndColaboradorId: ', error))
+
     }
 
-    async getByColaboradorId(colaboradorId) {
+    getByColaboradorId(colaboradorId) {
         if (!colaboradorId) {
             throw new Error('Colaborador ID obrigatório.')
         }
 
-        try {
-            const resposta = await fetch(
-                `${this.URL_BASE}/colaborador/${colaboradorId}`,
-                this.HEADERS_DEFAULT
-            )
-
-            return resposta.ok ? 
-            await resposta.json() : false
-        } catch (error) {
-            console.error(error)
-        }
+        return fetch(`${this.URL_BASE}/colaborador/${colaboradorId}`, this.HEADERS_DEFAULT)
+            .then(resposta => resposta.ok ? resposta.json() : false)
+            .catch(error => console.error('getByColaboradorId: ', error))
     }
 
-    async getById(id) {
+    getById(id) {
         if (!id) {
             throw new Error('O Feeback ID é obrigatório.')
         }
 
-        try {
-            const resposta = await fetch(`${this.URL_BASE}/${id}`, this.HEADERS_DEFAULT)
-
-            return resposta.ok ? 
-            await resposta.json() : false
-        } catch (error) {
-            console.error(error)
-        }
+        return fetch(`${this.URL_BASE}/${id}`, this.HEADERS_DEFAULT)
+            .then(resposta => resposta.ok ? resposta.json() : false)
+            .catch(error => console.error('getById: ', error))
     }
 
-    async post(feedback) {
+    post(feedback) {
         if (!feedback) {
             throw new Error('O Feeback é obrigatório.')
         }
 
-        try {
-            const resposta = await fetch(this.URL_BASE, {
-                method: 'POST',
-                ...this.HEADERS_JSON,
-                body: JSON.stringify(feedback)
-            })
-            
-           return resposta.ok ? 
-           await resposta.json() : false
-        } catch (error) {
-            console.error(error)
-        }
+        return fetch(this.URL_BASE, { method: 'POST', ...this.HEADERS_JSON, body: JSON.stringify(feedback) })
+            .then(resposta => resposta.ok ? resposta.json() : false)
+            .catch(error => console.error('post: ', error))
+
     }
 
-    async put(id, feedback) {
+    put(id, feedback) {
         if (!id) {
             throw new Error('O Feeback ID é obrigatório.')
         }
 
-        try {
-            const resposta = await fetch(`${this.URL_BASE}/${id}`, {
-                method: 'PUT',
-                ...this.HEADERS_JSON,
-                body: JSON.stringify(feedback)
-            })
-
-            return resposta.ok ? 
-            await resposta.json() : false
-        } catch (error) {
-            console.error(error)
-        }
+        return fetch(`${this.URL_BASE}/${id}`, { method: 'PUT', ...this.HEADERS_JSON, body: JSON.stringify(feedback) })
+            .then(resposta => resposta.ok ? resposta.json() : false)
+            .catch(error => console.error('put: ', error))
     }
 
-    async delete(id) {
+    delete(id) {
         if (!id) {
             throw new Error('O Feeback ID é obrigatório.')
         }
 
-        try {
-            const resposta = await fetch(`${this.URL_BASE}/${id}`, {
-                method: 'DELETE',
-                ...this.HEADERS_DEFAULT
-            })
-            
-            return resposta.ok ? 
-            await resposta.text() : false
-        } catch (error) {
-            console.error(error)
-        }
+        return fetch(`${this.URL_BASE}/${id}`, { method: 'DELETE', ...this.HEADERS_DEFAULT })
+            .then(resposta => resposta.ok ? resposta.text() : false)
+            .catch(error => console.error('delete: ', error))
     }
 }
