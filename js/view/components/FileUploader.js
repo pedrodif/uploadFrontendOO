@@ -22,7 +22,7 @@ export class FileUploader {
         input.type = 'file'
         input.multiple = true
         input.classList.add('upload-input')
-        input.addEventListener('change', async (evento) => this.#handleArquivoSelecionado(evento))
+        input.addEventListener('change', (evento) => this.#handleArquivoSelecionado(evento))
 
         const botaoUpload = Utils.criarElementoComTexto('button', 'Selecionar arquivos')
         botaoUpload.classList.add('upload-botao')
