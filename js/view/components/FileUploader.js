@@ -1,4 +1,5 @@
 import { Utils } from '../../utils/Utils.js'
+import { Notificador } from '../../utils/Notificador.js'
 
 export class FileUploader {
     #container
@@ -40,19 +41,22 @@ export class FileUploader {
         const arquivos = Array.from(evento.target.files)
 
         for(let arquivo of arquivos) {
-            const { item, progresso } = this.#criarBarraProgresso(arquivo)
+            const { item, progresso } = this.#montarBarraProgresso(arquivo)
             this.#listaArquivos.appendChild(item)
 
-            await this.#animarBarraDeProgresso(progresso, arquivo.size <= this.#TAMANHO_MAXIMO)
+            await this.#animarBarraDeProgresso(progresso, arquivo)
                 .then(() => {
                     this.#arquivos.push(arquivo)
-                    item.replaceWith(this.#criarElementoArquivo(arquivo))
+                    item.replaceWith(this.#montarUploadedItem(arquivo))
                 }
-            ).catch(() => item.remove())
+            ).catch((erro) => {
+                Notificador.erro(erro.message)
+                item.remove()
+            })
         }
     }
 
-    #animarBarraDeProgresso(progresso, tamanhoValido) {
+    #animarBarraDeProgresso(progresso, arquivo) {
         return new Promise((resolve, reject) => {
             let progressoAtual = 0
             const intervalo = setInterval(() => {
@@ -62,17 +66,17 @@ export class FileUploader {
                 if (progressoAtual >= 100) {
                     clearInterval(intervalo)
 
-                    if (tamanhoValido) {
+                    if (arquivo.size <= this.#TAMANHO_MAXIMO) {
                         resolve('Upload concluído')
                     } else {
-                        reject(new Error('Tamanho de arquivo inválido'))
+                        reject(new Error(`Arquivo ${arquivo.name} excede o tamanho máximo.`))
                     }
                 }
             }, 200)
         })
     }
 
-    #criarBarraProgresso(arquivo) {
+    #montarBarraProgresso(arquivo) {
         const item = Utils.criarElemento('li')
         item.classList.add('uploading-item')
 
@@ -89,7 +93,7 @@ export class FileUploader {
         return { item, progresso }
     }
 
-    #criarElementoArquivo(arquivo) {
+    #montarUploadedItem(arquivo) {
         const item = Utils.criarElemento('li')
         item.classList.add('uploaded-item')
 
