@@ -9,10 +9,10 @@ export class FileUploader {
 
     constructor(container) {
         this.#container = container
-        this.#montarEstrutura()
+        this.#montarFileUploader()
     }
 
-    #montarEstrutura() {
+    #montarFileUploader() {
         this.#container.classList.add('upload-container')
 
         const iconeUpload = Utils.criarElemento('i')
