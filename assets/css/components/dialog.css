@@ -14,14 +14,15 @@
 .dialog-container {
     background: #fff;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: var(--radius);
     min-width: 300px;
     max-width: 90%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box_shadow);
     text-align: center;
 }
 
-.dialog-container p {
+.dialog-container h4 {
+    font-weight: 400;
     margin-bottom: 20px;
 }
 
@@ -29,7 +30,7 @@
     margin: 0 10px;
     padding: 8px 16px;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius);
     cursor: pointer;
 }
 

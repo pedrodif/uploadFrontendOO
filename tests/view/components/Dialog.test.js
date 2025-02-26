@@ -33,7 +33,7 @@ describe('Dialog', () => {
         })
 
         test('Deve ter criado mensagem corretamente', () => {
-            expect(Utils.consultarSeletor('p').textContent).toBe(mensagem)
+            expect(Utils.consultarSeletor('h4').textContent).toBe(mensagem)
         })
 
         test('Deve ter atribuído o atributo role corretamente', () => {
@@ -48,14 +48,15 @@ describe('Dialog', () => {
             expect(container.getAttribute('aria-labelledby')).toBe('dialog-title')
         })
        
-        // teste('Deve focar no botão confirmar ao renderizar componente', () => {
-        //     expect(document.activeElement).toBe(document.querySelector('.confirmar'))
-        // })
-
         test('Deve remover o dialog ao fechar', () => {
             Utils.consultarSeletor('.cancelar').click()
             expect(Utils.consultarSeletor('.dialog-overlay')).toBeNull()
         })
+    })
+
+    test('Deve remover o Dialog após o clique', () => {
+        document.querySelector('.confirmar').click()
+        expect(Utils.consultarSeletor('.dialog-sobreposicao')).toBeNull()
     })
 
     test('Deve retornar uma Promise que resolve com true ao confirmar', async () => {
@@ -79,19 +80,11 @@ describe('Dialog', () => {
         spy.mockRestore()
     })
 
-    // test('Deve retornar uma Promise que resolve com false e fechar o Dialog ao pressionar Escape', async () => {
-    //     const promise = dialog.show();
-    //     const event = new KeyboardEvent('keydown', { key: 'Escape' });
-    //     document.dispatchEvent(event);
-    //     const resultado = await promise;
-    //     expect(resultado).toBe(false);
-    // })
-
-   
-    // test('Deve remover os event listeners e o dialog após o clique', async () => {
-    //     await dialog.show();
-    //     document.querySelector('.confirm').click();
-    //     expect(document.body.querySelector('.dialog-overlay')).toBeNull();
-    //     // Verifique se os event listeners foram removidos (pode ser mais complexo)
-    //   })
+    test('Deve retornar uma Promise que resolve com false e fechar o Dialog ao pressionar Escape', async () => {
+        const promise = dialog.show()
+        const evento = new KeyboardEvent('keydown', { key: 'Escape' })
+        document.dispatchEvent(evento)
+        const resultado = await promise
+        expect(resultado).toBe(false)
+    })
 })

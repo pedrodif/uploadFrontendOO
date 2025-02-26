@@ -36,6 +36,7 @@ export class FeedbackDetalhesController extends FeedbackController {
 
     async #lidarComSubmit(feedback) {
         const { modo } = Url.consultarParametros()
+
         const resposta =
             modo === 'detalhes' ? await super.atualizar(feedback) : await super.criar(feedback)
 
