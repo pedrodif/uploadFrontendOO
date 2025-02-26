@@ -48,7 +48,6 @@ describe('Dialog', () => {
             expect(container.getAttribute('aria-labelledby')).toBe('dialog-title')
         })
        
-
         // teste('Deve focar no botão confirmar ao renderizar componente', () => {
         //     expect(document.activeElement).toBe(document.querySelector('.confirmar'))
         // })
@@ -58,8 +57,6 @@ describe('Dialog', () => {
             expect(Utils.consultarSeletor('.dialog-overlay')).toBeNull()
         })
     })
-
- 
 
     test('Deve retornar uma Promise que resolve com true ao confirmar', async () => {
         const promise = dialog.show()

@@ -1,3 +1,4 @@
+import { Utils } from '../../utils/Utils.js'   
 export class Dialog {
     #mensagem
     #sobreposicao
@@ -11,24 +12,21 @@ export class Dialog {
     }
 
     #montarDialog() {
-        this.#sobreposicao = document.createElement('div')
+        this.#sobreposicao = Utils.criarElemento('div')
         this.#sobreposicao.classList.add('dialog-sobreposicao')
 
-        this.#conteiner = document.createElement('div')
+        this.#conteiner = Utils.criarElemento('div')
         this.#conteiner.classList.add('dialog-container')
         this.#conteiner.setAttribute('role', 'dialog')
         this.#conteiner.setAttribute('aria-modal', 'true')
         this.#conteiner.setAttribute('aria-labelledby', 'dialog-title')
 
-        const elementoMensagem = document.createElement('p')
-        elementoMensagem.textContent = this.#mensagem
+        const elementoMensagem = Utils.criarElementoComTexto('p', this.#mensagem)
 
-        this.#botaoConfirmar = document.createElement('button')
-        this.#botaoConfirmar.textContent = 'Confirmar'
+        this.#botaoConfirmar = Utils.criarElementoComTexto('button', 'Confirmar')
         this.#botaoConfirmar.classList.add('confirmar')
 
-        this.#botaoCancelar = document.createElement('button')
-        this.#botaoCancelar.textContent = 'Cancelar'
+        this.#botaoCancelar = Utils.criarElementoComTexto('button', 'Cancelar')
         this.#botaoCancelar.classList.add('cancelar')
 
         this.#conteiner.appendChild(elementoMensagem)
