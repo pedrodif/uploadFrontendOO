@@ -7,12 +7,12 @@ export class Dialog {
 
     constructor(mensagem) {
         this.#mensagem = mensagem
-        this.#init()
+        this.#montarDialog()
     }
 
-    #init() {
+    #montarDialog() {
         this.#sobreposicao = document.createElement('div')
-        this.#sobreposicao.classList.add('dialog-overlay')
+        this.#sobreposicao.classList.add('dialog-sobreposicao')
 
         this.#conteiner = document.createElement('div')
         this.#conteiner.classList.add('dialog-container')
@@ -25,11 +25,11 @@ export class Dialog {
 
         this.#botaoConfirmar = document.createElement('button')
         this.#botaoConfirmar.textContent = 'Confirmar'
-        this.#botaoConfirmar.classList.add('confirm')
+        this.#botaoConfirmar.classList.add('confirmar')
 
         this.#botaoCancelar = document.createElement('button')
         this.#botaoCancelar.textContent = 'Cancelar'
-        this.#botaoCancelar.classList.add('cancel')
+        this.#botaoCancelar.classList.add('cancelar')
 
         this.#conteiner.appendChild(elementoMensagem)
         this.#conteiner.appendChild(this.#botaoConfirmar)
@@ -37,30 +37,30 @@ export class Dialog {
         this.#sobreposicao.appendChild(this.#conteiner)
     }
 
-    #handleKeyDown(evento) {
+    #lidarComKeyDown(evento) {
         if (evento.key === 'Escape') {
             this.#botaoCancelar.click()
         }
     }
 
-    #closeDialog() {
-        document.removeEventListener('keydown', this.#handleKeyDown)
+    #fecharDialog() {
+        document.removeEventListener('keydown', this.#lidarComKeyDown)
         this.#sobreposicao.remove()
     }
 
     show() {
         return new Promise((resolve) => {
             document.body.appendChild(this.#sobreposicao)
-            document.addEventListener('keydown', this.#handleKeyDown)
+            document.addEventListener('keydown', this.#lidarComKeyDown)
             
             this.#botaoConfirmar.focus()
             this.#botaoConfirmar.addEventListener('click', () => {
-                this.#closeDialog()
+                this.#fecharDialog()
                 resolve(true)
             }, { once: true })
 
             this.#botaoCancelar.addEventListener('click', () => {
-                this.#closeDialog()
+                this.#fecharDialog()
                 resolve(false)
             }, { once: true })
         })

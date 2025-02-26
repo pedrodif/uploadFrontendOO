@@ -11,7 +11,7 @@ export class FeedbackDetalhesView {
     }
 
     atualizarListaFeedbacks(feedback, callback) {
-        this.feedbackContainer.prepend(new FeedbackCard(feedback).montarFeedback(callback))
+        this.feedbackContainer.prepend(new FeedbackCard(feedback, callback))
     }
 
     listarFeedbacks(feedbacks, callback) {
@@ -19,7 +19,7 @@ export class FeedbackDetalhesView {
 
         if(feedbacks.length > 0) {
             feedbacks.reverse().forEach(feedback => {
-                this.feedbackContainer.appendChild(new FeedbackCard(feedback).montarFeedback(callback))
+                this.feedbackContainer.appendChild(new FeedbackCard(feedback, callback))
             })
         }
     }

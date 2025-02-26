@@ -1,3 +1,4 @@
+import { Utils } from '../../../js/utils/Utils.js'
 import { FileUploader } from "../../../js/view/components/FileUploader.js"
 
 describe('FileUploader', () => {
@@ -5,7 +6,7 @@ describe('FileUploader', () => {
     let fileUploader
 
     beforeEach(() => {
-        container = document.createElement('div')
+        container = Utils.criarElemento('div')
         document.body.appendChild(container)
 
         fileUploader = new FileUploader(container)
