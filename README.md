@@ -183,7 +183,7 @@ Adicione ou edite seu `launch.json` com a seguinte configuração:
 ```
 
 6 - **Adicione Breakpoints**
-Marque os pontos de parada (breakpoints) no código onde deseja inspecionar a execução.
+- Marque os pontos de parada (breakpoints) no código onde deseja inspecionar a execução.
 
 7 - **Rode o seguinte comando no terminal**
 
