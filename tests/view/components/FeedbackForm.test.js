@@ -48,7 +48,7 @@ describe('FeedbackForm', () => {
     })
 
     test("Deve inicializar corretamente com o botão de submit", () => {
-        expect(feedbackForm.btnSubmit).toBe(Utils.consultarSeletor('#form').querySelector('button[type=submit]'))
+        expect(feedbackForm.botaoSubmit).toBe(Utils.consultarSeletor('#form').querySelector('button[type=submit]'))
     })
 
     test("Deve validar o formulário corretamente", () => {
@@ -80,8 +80,8 @@ describe('FeedbackForm', () => {
         feedbackForm.configurar("detalhes")
         feedbackForm.validarForm = jest.fn().mockReturnValue(true)
 
-        feedbackForm.btnSubmit.click()
-        feedbackForm.btnSubmit.click()
+        feedbackForm.botaoSubmit.click()
+        feedbackForm.botaoSubmit.click()
 
         expect(callbackMock).toHaveBeenCalled()
     })
@@ -90,12 +90,12 @@ describe('FeedbackForm', () => {
         beforeAll(() => feedbackForm.configurar("detalhes"))
 
         test("Fluxo Detalhes", () => {
-            expect(feedbackForm.btnSubmit.textContent).toBe("Editar")
+            expect(feedbackForm.botaoSubmit.textContent).toBe("Editar")
         })
 
         test("Fluxo Salvar Edição", () => {
-            feedbackForm.btnSubmit.click()
-            expect(feedbackForm.btnSubmit.textContent).toBe("Salvar Alterações")
+            feedbackForm.botaoSubmit.click()
+            expect(feedbackForm.botaoSubmit.textContent).toBe("Salvar Alterações")
         })
     })
 })
