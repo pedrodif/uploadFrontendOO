@@ -64,7 +64,7 @@ Para configurar e executar os testes com Jest, siga os passos abaixo:
    npm install --save-dev jest babel-jest @babel/preset-env
    ```
 
-4. **Instalar o jest JSDOM**
+4. **Instalar o jest JSDOM:**
    
    Isso permite que os testes sejam executados em um ambiente que simula o comportamento de um navegador, incluindo o document, o window e outros elementos do DOM.
 
@@ -141,7 +141,8 @@ Para configurar e executar os testes com Jest, siga os passos abaixo:
 ###  Utilizando o Debugger com Jest no VS Code
 Ao criar os testes, pode ser necessário usar o modo debugger para identificar problemas. Veja o passo a passo abaixo:
 
-1. **Altere o `package.json`**
+1. **Altere o `package.json`:**
+   
 Adicione ou modifique o script de depuração para Jest:
 
 ```json
@@ -150,16 +151,20 @@ Adicione ou modifique o script de depuração para Jest:
 }
 ```
 
-2. **Abra o menu "Run and Debug"**
+2. **Abra o menu "Run and Debug":**
+   
 No VS Code, vá para a aba **"Run and Debug"** (ou pressione `Ctrl+Shift+D`).
 
-3. **Crie um arquivo `launch.json`**
+3. **Crie um arquivo `launch.json`:**
+   
 Se ainda não existir, clique em **"Create a launch.json file"**.
 
-4. **Escolha a opção "Node.js"**
+4. **Escolha a opção "Node.js":**
+   
 Ao ser solicitado, selecione **"Node.js"** como o ambiente de depuração.
 
-5. **Configure o `launch.json`**
+5. **Configure o `launch.json`:**
+   
 Adicione ou edite seu `launch.json` com a seguinte configuração:
 
 ```json
@@ -182,7 +187,8 @@ Adicione ou edite seu `launch.json` com a seguinte configuração:
 }
 ```
 
-6. **Adicione Breakpoints**
+6. **Adicione Breakpoints:**
+   
 Marque os pontos de parada (breakpoints) no código onde deseja inspecionar a execução.
 
 7. **Rode o seguinte comando no terminal**
@@ -191,7 +197,8 @@ Marque os pontos de parada (breakpoints) no código onde deseja inspecionar a ex
 npm run test:debug
 ```
 
-8 - **Inicie a Depuração**
+8. **Inicie a Depuração:**
+   
 Clique no botão **▶ Iniciar Depuração** para rodar os testes e pausar nos breakpoints.
 
   
