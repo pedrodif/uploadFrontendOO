@@ -151,13 +151,13 @@ Adicione ou modifique o script de depuração para Jest:
 ```
 
 2 - **Abra o menu "Run and Debug"**
-- No VS Code, vá para a aba **"Run and Debug"** (ou pressione `Ctrl+Shift+D`).
+No VS Code, vá para a aba **"Run and Debug"** (ou pressione `Ctrl+Shift+D`).
 
 3 - **Crie um arquivo `launch.json`**
-- Se ainda não existir, clique em **"Create a launch.json file"**.
+Se ainda não existir, clique em **"Create a launch.json file"**.
 
 4 - **Escolha a opção "Node.js"**
-- Ao ser solicitado, selecione **"Node.js"** como o ambiente de depuração.
+Ao ser solicitado, selecione **"Node.js"** como o ambiente de depuração.
 
 5 - **Configure o `launch.json`**
 Adicione ou edite seu `launch.json` com a seguinte configuração:
@@ -183,7 +183,7 @@ Adicione ou edite seu `launch.json` com a seguinte configuração:
 ```
 
 6 - **Adicione Breakpoints**
-- Marque os pontos de parada (breakpoints) no código onde deseja inspecionar a execução.
+Marque os pontos de parada (breakpoints) no código onde deseja inspecionar a execução.
 
 7 - **Rode o seguinte comando no terminal**
 
@@ -192,7 +192,7 @@ npm run test:debug
 ```
 
 8 - **Inicie a Depuração**
-- Clique no botão **▶ Iniciar Depuração** para rodar os testes e pausar nos breakpoints.
+Clique no botão **▶ Iniciar Depuração** para rodar os testes e pausar nos breakpoints.
 
   
 
