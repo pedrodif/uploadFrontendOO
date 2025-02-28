@@ -24,8 +24,14 @@ export class Utils {
     }
 
     static formatarDataBR(variante) {
-        let [ano, mes, dia] = variante.split('-').map(Number)
-        let dataFormatada = new Date(ano, mes - 1, dia).toLocaleDateString('pt-BR')
+        const [ano, mes, dia] = variante.split('-').map(Number)
+        const dataFormatada = new Date(ano, mes - 1, dia).toLocaleDateString('pt-BR')
+        return dataFormatada
+    }
+
+    static formatarDataHora(variante) {
+        const dateOptions = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }
+        const dataFormatada = new Date(variante).toLocaleDateString(undefined, dateOptions)
         return dataFormatada
     }
 
