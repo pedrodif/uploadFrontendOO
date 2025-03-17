@@ -5,10 +5,12 @@ export class FileUploader {
     #container
     #listaArquivos
     #arquivos = []
+    #tiposArquivos
     #TAMANHO_MAXIMO = 5 * 1024 * 1024
 
-    constructor(container) {
+    constructor(container, tiposArquivos = '*/*') {
         this.#container = container
+        this.#tiposArquivos = tiposArquivos
         this.#montarFileUploader()
     }
 
@@ -21,6 +23,7 @@ export class FileUploader {
         const input = Utils.criarElemento('input')
         input.type = 'file'
         input.multiple = true
+        input.accept = this.#tiposArquivos
         input.classList.add('upload-input')
         input.addEventListener('change', (evento) => this.#handleArquivoSelecionado(evento))
 

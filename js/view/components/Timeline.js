@@ -1,4 +1,4 @@
-import  { Utils } from "../../utils/Utils.js"
+import  { Utils } from '../../utils/Utils.js'
 
 export class Timeline {
     #itens
@@ -12,8 +12,8 @@ export class Timeline {
     renderizar(itens) {
         this.#itens = [...itens]
 
-        this.#container.innerHTML = ""
-        this.#container.classList.add("timeline")
+        this.#container.innerHTML = ''
+        this.#container.classList.add('timeline')
 
         const fragmento = document.createDocumentFragment()
         this.#itens.forEach(item => fragmento.appendChild(this.#montarTimelineItem(item)))
@@ -22,28 +22,28 @@ export class Timeline {
     }
 
     #montarTimelineItem(item) {
-        const timeLineItem = Utils.criarElemento("div")
-        timeLineItem.classList.add("timeline-item")
+        const timeLineItem = Utils.criarElemento('div')
+        timeLineItem.classList.add('timeline-item')
 
-        if (item.status !== "ativo") {
-            timeLineItem.classList.add("timeline-item-inativo")
+        if (item.status !== 'ativo') {
+            timeLineItem.classList.add('timeline-item-inativo')
         } 
 
-        const icone = Utils.criarElemento("i")
+        const icone = Utils.criarElemento('i')
         icone.className = item.icone
 
-        const marco = Utils.criarElemento("div")
-        marco.classList.add("timeline-marco")
+        const marco = Utils.criarElemento('div')
+        marco.classList.add('timeline-marco')
         marco.appendChild(icone)
 
-        const usuario = Utils.criarElementoComTexto("span", item.usuario)
-        usuario.classList.add("timeline-info-usuario")
+        const usuario = Utils.criarElementoComTexto('span', item.usuario)
+        usuario.classList.add('timeline-info-usuario')
 
-        const data = Utils.criarElementoComTexto("span", Utils.formatarDataHora(item.data))
-        data.classList.add("timeline-info-data")
+        const data = Utils.criarElementoComTexto('span', Utils.formatarDataHora(item.data))
+        data.classList.add('timeline-info-data')
 
-        const info = Utils.criarElemento("div")
-        info.classList.add("timeline-info")
+        const info = Utils.criarElemento('div')
+        info.classList.add('timeline-info')
         info.appendChild(usuario)
         info.appendChild(data)
         
