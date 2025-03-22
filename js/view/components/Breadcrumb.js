@@ -21,7 +21,7 @@ export class Breadcrumb {
         container.appendChild(ul)
 
         const main = Utils.consultarSeletor('main')
-        document.body.insertBefore(container, main)
+        main.prepend(container)
 
         return ul
     }
@@ -35,7 +35,7 @@ export class Breadcrumb {
 
     #montarAncoraHome(item) {
         const icone = Utils.criarElemento('i')
-        icone.classList.add('fas', 'fa-home')
+        icone.classList.add('fa-solid', 'fa-house')
 
         const ancora = Utils.criarElemento('a')
         ancora.href = item.link
