@@ -82,6 +82,12 @@
     margin: 0 auto;
 }
 
+.sidebar-ancora:hover {
+    background-color: #d3d3d3; 
+    border-radius: var(--radius);
+}
+
+
 .sidebar-ancora i {
     transition: transform 0.2s ease, color 0.2s ease;
 }
@@ -91,11 +97,6 @@
     color: #007bff; 
 }
   
-.sidebar-ancora:hover {
-    background-color: #e9ecef; 
-    border-radius: var(--radius);
-}
-
 [data-tooltip] {
     position: relative;
     cursor: pointer;
