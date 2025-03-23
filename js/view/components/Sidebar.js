@@ -36,48 +36,57 @@ export class Sidebar {
     }
 
     #montarAvatar(item) {
-        const img = document.createElement('img')
-        img.id = item.id
-        img.src = this.#usuario.avatar
-        img.alt = 'Avatar Usuário'
-        img.title = item.tooltip
-        img.classList.add('user-icon')
+        const avatar = Utils.criarElemento('img')
+        avatar.id = item.id
+        avatar.src = this.#usuario.avatar
+        avatar.alt = 'Avatar Usuário'
+        avatar.classList.add('avatar-usuario')
 
-        return img
+        return avatar
     }
 
     #montarAncoraPadrao(item) {
-        const icone = document.createElement('i')
+        const icone = Utils.criarElemento('i')
         icone.id = item.id
         icone.classList.add(...item.icone)
 
-        const ancora = document.createElement('a')
-        ancora.classList.add('sidebar-link')
-        ancora.title = item.tooltip
+        const ancora = Utils.criarElemento('a')
+        ancora.classList.add('sidebar-ancora')
+        ancora.setAttribute('data-tooltip', item.tooltip)
         ancora.href = item.link
         ancora.appendChild(icone)
 
         return ancora
     }
 
+    #montarSeparador() {
+        const separador = Utils.criarElemento('hr')
+        separador.classList.add('separador')
+
+        return separador
+    }
+
     renderizar() {
-        const ul = document.createElement('ul')
-        ul.classList.add('sidebar-list')
+        const ul = Utils.criarElemento('ul')
+        ul.classList.add('sidebar-lista')
 
         this.#icones.forEach((item, index) => {
-            const li = document.createElement('li')
+            const li = Utils.criarElemento('li')
             li.classList.add('sidebar-item')
 
-            index == 0 ? li.appendChild(this.#montarAvatar(item)) 
-            : li.appendChild(this.#montarAncoraPadrao(item))
-            
+            const elemento = index == 0 ? this.#montarAvatar(item): this.#montarAncoraPadrao(item)
+            li.appendChild(elemento)
             ul.appendChild(li)
+
+            if (index === 0) {
+                ul.appendChild(this.#montarSeparador())
+            }
         })
 
-        const nav = document.createElement('nav')
+        const nav = Utils.criarElemento('nav')
         nav.appendChild(ul)
 
-        const sidebar = document.createElement('aside')
+        const sidebar = Utils.criarElemento('aside')
         sidebar.classList.add('sidebar')
         sidebar.appendChild(nav)
 
