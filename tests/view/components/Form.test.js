@@ -3,6 +3,7 @@ import { Form } from '../../../js/view/components/Form.js'
 
 describe('Form', () => {
     let form
+    
     beforeAll(() => {
         const inputNome = Utils.criarElemento('input')
         inputNome.type = 'text'
