@@ -4,7 +4,7 @@ import { FeedbackDetalhesController } from '../controller/feedback/FeedbackDetal
 
 const usuario = {
     nome: 'Pedro Ferreira',
-    avatar: 'https://api.dicebear.com/9.x/bottts/svg?seed=pedro', 
+    avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=Pedro', 
     tipo: 'adm'
 }
 

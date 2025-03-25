@@ -67,7 +67,8 @@
     border-radius: 50%; 
     object-fit: cover; 
     margin-bottom: 10px;
-    border: 2px solid #007bff;
+    border: 1px solid #6a6a6a;
+    box-shadow: var(--box_shadow);
 }
 
 .sidebar-ancora {

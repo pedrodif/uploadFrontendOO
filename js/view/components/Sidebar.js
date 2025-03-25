@@ -13,23 +13,21 @@ export class Sidebar {
         switch (this.#usuario.tipo) {
             case 'adm':
                 this.#icones = [
-                    ...this.#iconesCliente,
-                    ...this.#iconesFuncionario,
+                    ...this.#iconesBase,
                     ...this.#iconesAdm,
-                    ...this.#iconesBase
+                    ...this.#iconesSistema
                 ]
                 break
             case 'funcionario':
                 this.#icones = [
-                    ...this.#iconesCliente,
-                    ...this.#iconesFuncionario,
-                    ...this.#iconesBase
+                    ...this.#iconesBase,
+                    ...this.#iconesSistema
                 ]
                 break
             default:
                 this.#icones = [
-                    ...this.#iconesCliente,
                     ...this.#iconesBase,
+                    ...this.#iconesSistema,
                 ]
                 break
         }
@@ -94,7 +92,7 @@ export class Sidebar {
         main.prepend(sidebar)
     }
 
-    get #iconesCliente() {
+    get #iconesBase() {
         return [
             {
                 id: 'usuario',
@@ -109,19 +107,14 @@ export class Sidebar {
                 id: 'profile',
                 tooltip: 'Perfil',
                 icone: ['fa-regular', 'fa-user']
-            }
-        ]
-    } 
-
-    get #iconesFuncionario() {
-        return [
+            },
             {
                 id: 'projetos',
                 tooltip: 'Projetos',
                 icone: ['fa-regular', 'fa-folder-open']
             },
         ]
-    }
+    } 
 
     get #iconesAdm() {
         return [
@@ -133,7 +126,7 @@ export class Sidebar {
         ]
     }
 
-    get #iconesBase() {
+    get #iconesSistema() {
         return [
             {
                 id: 'onboarding',
